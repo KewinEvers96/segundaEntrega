@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 
-const directioriopublico = path.join(__dirname, '../public');
+const directioriopublico = path.join(__dirname, '../public/img');
 app.use(express.static(directioriopublico));
 
 console.log(__dirname)
