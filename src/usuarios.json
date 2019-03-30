@@ -1,14 +1,1 @@
-[{
-    "id":1001,
-    "nombre":"Alberto Cardenas",
-    "correo":"albertoCar@hotmail",
-    "telefono":41320402,
-    "tipoUsuario":"coordinador"
-},
-{
-    "id":1002,
-    "nombre":"Gloria Borger",
-    "correo":"globorger@hotmail",
-    "telefono":10001012,
-    "tipoUsuario":"aspirante"
-}]
+[{"id":1001,"nombre":"Alberto Cardenas","correo":"albertoCar@hotmail","telefono":41320402,"tipoUsuario":"coordinador"},{"id":1002,"nombre":"Gloria Borger","correo":"globorger@hotmail","telefono":10001012,"tipoUsuario":"aspirante"}]
