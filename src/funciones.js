@@ -22,7 +22,7 @@ const registrar = (_nombre, _id, _correo, _telefono) => {
     let duplicado = listaUsuarios.find(buscar => buscar.id == usuario.nombre);
     if(!duplicado){// si el usuario no está duplicado
         listaUsuarios.push(usuario);
-        guardar();
+        guardar("usuarios.json");
     }
     else{
         console.log("Error usuario duplicado");
@@ -36,4 +36,11 @@ const guardar = (nombreArchivo) => {
         if (err) throw (err);
         console.log('Archivo guardado')
     });
+}
+
+
+module.exports = {
+    listar, 
+    registrar,
+    guardar
 }
