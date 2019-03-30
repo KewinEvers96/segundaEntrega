@@ -1,5 +1,6 @@
 const hbs = require('hbs');
 const funciones = require('./funciones');
+const appp = require('./app');
 
 hbs.registerHelper('verificar', (id)=>{
     listaUsuarios = require('./cursos.json');
@@ -32,6 +33,7 @@ hbs.registerHelper('listarDisponibles', () =>{
     <th scope='col'>Estado</th>\
     <th scope='col'>Modalidad</th>\
     <th scope='col'>Intensidad horaria</th>\
+    <th scope='col'> </th>\
     </thead><tbody>";
 
     cursosDisponibles.forEach(curso => {
@@ -42,7 +44,10 @@ hbs.registerHelper('listarDisponibles', () =>{
         "</td><td>" + curso.estado + 
         "</td><td>" + curso.modalidad + 
         "</td><td>" + curso.intensidad+
-        "</td></tr>";
+        "</td><td><form action='/aspirante/inscripcion' method='get'>" + 
+        "<input type='hidden' name='idCurso' value='" + curso.idCurso + 
+        "'><input type='hidden' name='idAspirante' value='" + appp.idingreso + 
+        "'><button class='btn btn-outline-secondary'>Inscribirse</button></form></td></tr>";
     });
 
     tablaT = tablaT + "</tbody><table>";
@@ -53,14 +58,14 @@ hbs.registerHelper('listarDisponibles', () =>{
 
 hbs.registerHelper('listarCursos', () =>{
     listaCursos = require('./cursos.json');
-    tablaT = "<table border=1><thead>\
-    <th>Código</th>\
-    <th>Nombre curso</th>\
-    <th>Descripción</th>\
-    <th>Valor</th>\
-    <th>Estado</th>\
-    <th>Modalidad</th>\
-    <th>Intensidad horaria</th>\
+    tablaT = "<table border=1 class='table table-hover'><thead class='thead-dark'>\
+    <th scope='col'>Código</th>\
+    <th scope='col'>Nombre curso</th>\
+    <th scope='col'>Descripción</th>\
+    <th scope='col'>Valor</th>\
+    <th scope='col'>Estado</th>\
+    <th scope='col'>Modalidad</th>\
+    <th scope='col'>Intensidad horaria</th>\
     </thead><tbody>";
 
     listaCursos.forEach(curso => {
