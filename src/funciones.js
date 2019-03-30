@@ -50,7 +50,7 @@ const guardar = (nombreArchivo,lista) => {
 const crearCurso = (_id, _nombre, _descripcion, _valor, _modalidad, _intensidad ) => {
     leerCursos();
     let curso = {
-        id:_id,
+        idCurso:_id,
         nombre :_nombre,
         descripcion:_descripcion,
         valor:_valor,
