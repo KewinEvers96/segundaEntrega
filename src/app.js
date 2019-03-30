@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const hbs = require('hbs');
-
+const funciones = require('./funciones');
 
 
 
@@ -16,19 +16,27 @@ app.set('view engine', 'hbs');
 
 
 app.get('/registered', function (req, res) {
+	nombre: req.query.name
+	id: req.query.document
+	correo: req.query.email
+	telefono: parseInt(req.query.phoneNumber)
 
-  res.render('login.hbs')
+	funciones.registrar(nombre, id, correo, telefono)
+  	res.render('login.hbs')
 });
 
 
 
+
+
+
+app.get('/index', function (req, res) {
+	
+  	res.render('login.hbs')
+});
 
 app.get('/register', function (req, res) {
   res.render('usuario/registrar.hbs')
-});
-
-app.get('/index', function (req, res) {
-  res.render('login.hbs')
 });
 
 app.get('/login', function (req, res) {
