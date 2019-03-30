@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<head>
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</head>
+
+<body>
+	<br><br><br>
+	<div class="container">
+		<div class="row no-gutters">
+			<div class="col-12 col-sm-6 col-md-8 col-md-offset-2">
+		  		<form action="/oferta" method="get">
+					<button class="btn btn-dark">Volver</button>
+				</form>
+				<br><br>
+				<h3>Descripción del curso</h3>
+				<br>
+				<div class="row col-sm">
+					<h5>Código:</h5>
+					<input class="form-control" type="text" name="id" value="{{id}}" readonly>
+				</div>
+				<br>
+				<div class="row col-sm">
+					<h5>Nombre:</h5>
+					<input class="form-control" type="text" name="nombre" value="{{nombre}}" readonly>
+				</div>
+				<br>
+				<div class="row col-sm">
+					<h5>Descripción:</h5>
+					<input class="form-control" type="text" name="descripcion" value="{{descripcion}}" readonly>
+				</div>
+				<br>
+				<div class="row col-sm">
+					<h5>Modalidad:</h5>
+					<input class="form-control" type="text" name="modalidad" value="{{modalidad}}" readonly>
+				</div>
+				<br>
+				<div class="row col-sm">
+					<h5>Intensidad:</h5>
+					<input class="form-control" type="text" name="intensidad" value="{{intensidad}}" readonly>
+				</div>
+				<br>
+				<br>
+			</div>
+		  	<div class="col-6 col-md-4">
+		  		<br><br><br><br>
+		  		<div class="card" style="width: 18rem;">
+				  <div class="card-body">
+				    <h5 class="card-title">Soy usuario</h5>
+				    <p class="card-text">Ingreso al sistema más chévere de todos</p>
+				    <a href="/login" class="btn btn-primary">Ingresar al sistema</a>
+				  </div>
+				</div>
+		  	</div>
+		</div>
+	</div>
+
+
+
+</body>

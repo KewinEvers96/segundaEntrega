@@ -148,6 +148,16 @@ app.get('/login', function (req, res) {
   res.render('login.hbs')
 });
 
+app.get('/descripcion', function (req, res) {
+	id = parseInt(req.query.idCurso);
+	curso = funciones.buscarCurso(id);
+	nombre = curso.nombre;
+	descripcion = curso.descripcion;
+	modalidad = curso.modalidad;
+	intensidad = curso.intensidad;
+  	res.render('descripcion.hbs',{id:id, curso:curso, descripcion:descripcion, modalidad:modalidad, intensidad:intensidad, nombre:nombre})
+});
+
 app.get('/oferta', function (req, res) {
   res.render('oferta.hbs')
 });
@@ -159,7 +169,6 @@ app.get('/index', function (req, res) {
 app.get('/', function (req, res) {
   res.render('index.hbs')
 });
-
 
 app.listen(3000, () => {
 	console.log('Escuchando en el puerto 3000')

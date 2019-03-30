@@ -69,7 +69,7 @@ hbs.registerHelper('listarCursos', () =>{
     </thead><tbody>";
 
     listaCursos.forEach(curso => {
-       tablaT = tablaT +  "<tr><td>" + curso.idCurso +
+       tablaT = tablaT +  "<tr><td>" + curso.idCurso + 
         "</td><td>" + curso.nombre + 
         "</td><td>" + curso.descripcion + 
         "</td><td>" + curso.valor + 
@@ -88,21 +88,18 @@ hbs.registerHelper('listarCursos', () =>{
 hbs.registerHelper('listarOferta', () =>{
     cursosDisponibles = funciones.mostrarCursosDisponibles();
     tablaT = "<table border=1 class='table'><thead class='thead-dark'>\
-    <th scope='col'>Código</th>\
     <th scope='col'>Nombre curso</th>\
     <th scope='col'>Descripción</th>\
     <th scope='col'>Valor</th>\
-    <th scope='col'>Modalidad</th>\
-    <th scope='col'>Intensidad horaria</th>\
     </thead><tbody>";
 
     cursosDisponibles.forEach(curso => {
-       tablaT = tablaT +  "<tr><td>" + curso.idCurso +
-        "</td><td>" + curso.nombre + 
-        "</td><td>" + curso.descripcion + 
+       tablaT = tablaT +  "<tr>" +
+        "</td><td><form action='/descripcion' method='get'>" + 
+        "<input type='hidden' name='idCurso' value='" + curso.idCurso + 
+        "'><button class='btn btn-outline-dark'>" + curso.nombre + "</button></form>" +
+        "</a></td><td>" + curso.descripcion + 
         "</td><td>" + curso.valor +  
-        "</td><td>" + curso.modalidad + 
-        "</td><td>" + curso.intensidad+
         "</td></tr>";
     });
 
@@ -110,3 +107,4 @@ hbs.registerHelper('listarOferta', () =>{
 
     return tablaT;
 });
+
