@@ -1,14 +1,1 @@
-[{
-    "idCurso":1001,
-    "nombre": "Curso básico node",
-    "descripcion":"Curso básico node",
-    "valor":300000,
-    "estado":"disponible"
-},
-{
-    "idCurso":1002,
-    "nombre":"Python avanzado para ingenieros",
-    "descripcion":"Curso para ingenieros que sepan de python básico",
-    "valor":450000,
-    "estado":"cerrado"
-}]
+[{"idCurso":1001,"nombre":"Curso básico node","descripcion":"Curso básico node","valor":300000,"estado":"disponible"},{"idCurso":1002,"nombre":"Python avanzado para ingenieros","descripcion":"Curso para ingenieros que sepan de python básico","valor":450000,"estado":"cerrado"},{"id":10004,"nombre":"MATLAB","descripcion":"MATLAB PARA DUMMIES","valor":2000000,"estado":"disponible"}]
