@@ -79,9 +79,7 @@ app.get('/aspirante/cursos', function (req, res) {
 
 app.get('/aspirante/inscripcion', function (req, res) {
 	idCurso = parseInt(req.query.idCurso);
-
-
-
+	funciones.agregarCurso(idCurso, idingreso);
 	console.log('inscripcion aspirante');
   	res.render('usuario/aspirante/inscripcion.hbs',{id:idingreso})
 });
