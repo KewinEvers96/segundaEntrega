@@ -7,9 +7,9 @@ const fs = require('fs');
 
 
 
-const directioriopublico = path.join(__dirname, '../public/img');
+//const directioriopublico = path.join(__dirname, '../public/img');
 const directioriopartials = path.join(__dirname, '../partials');
-app.use(express.static(directioriopublico));
+//app.use(express.static(directioriopublico));
 hbs.registerPartials(directioriopartials);
 
 app.set('view engine', 'hbs');
@@ -48,9 +48,17 @@ app.get('/coordinador/cursos', function (req, res) {
 
 app.get('/coordinador/crearCurso', function (req, res) {
 	console.log('crear curso');
-  	res.render('usuario/coordinador/cursos.hbs',{id:idingreso})
+  	res.render('usuario/coordinador/crearCurso.hbs',{id:idingreso})
 });
 
+app.get('/coordinador/cursoCreado', function (req, res) {
+	
+
+
+	
+	console.log('curso creado');
+  	res.render('usuario/coordinador/cursos.hbs',{id:idingreso})
+});
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 
