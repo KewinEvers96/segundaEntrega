@@ -100,15 +100,15 @@ const mostrarCursosDisponibles = () =>
 // Funciones para actualización de datos de aspirantes
 // ===================================================
 
-// agregarCursoEstudiante
-const agregarCurso = (id_curso,id_estudiante) => {
+// agregarCursoAspirante
+const agregarCurso = (id_curso,id_aspirante) => {
     listar();
-    let aspiranteEncontrado = listaUsuarios.find(buscar => buscar.id == id_estudiante);
+    let aspiranteEncontrado = listaUsuarios.find(buscar => buscar.id == id_aspirante);
     let curso = buscarCurso(id_curso);
 
     if(!aspiranteEncontrado){
         // aspirante con ese codigo no encontrado
-        console.log('Estudiante no existe');
+        console.log('Aspirante no existe');
         return -1;
     }   
     else{
@@ -136,6 +136,24 @@ const agregarCurso = (id_curso,id_estudiante) => {
     else{
         // encontro un curso con código igual
         console.log("Error curso duplicado");
+        return -1;
+    }
+}
+
+// =====================================
+// Mostrar cursos del aspirante
+
+const mostrarCursosAspirante = codigo => {
+    listar();
+    let aspirante = listaUsuarios.find(buscar => buscar.id == codigo); 
+    if(!aspirante){
+        cursos = aspirante.cursos;
+        if(cursos == undefined){
+            cursos= [];
+        }
+        return cursos;
+    }
+    else{
         return -1;
     }
 }
