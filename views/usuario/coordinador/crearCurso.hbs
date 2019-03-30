@@ -8,20 +8,28 @@
 		<form action="/cursoCreado" method="get">
   			<div class="form-group">
 			    <label for="id">Id</label>
-			    <input type="number" class="form-control" id="id" placeholder="Ingrese el id del curso" required>
+			    <input type="number" class="form-control" name="id" placeholder="Ingrese el id del curso" required>
 			</div>
   			<div class="form-group">
 			    <label for="nombre">Nombre</label>
-			    <input type="text" class="form-control" id="nombre" placeholder="Ingrese el nombre del curso" required>
+			    <input type="text" class="form-control" name="nombre" placeholder="Ingrese el nombre del curso" required>
   			</div>
   			<div class="form-group">
 			    <label for="descripcion">Descripción</label>
-			    <textarea class="form-control" id="descripcion" rows="3"></textarea>
+			    <textarea class="form-control" name="descripcion" rows="3"></textarea>
   			</div>
   			<div class="form-group">
 			    <label for="valor">Valor</label>
-			    <input type="number" class="form-control" id="valor" placeholder="Ingrese el valor del curso" required>
+			    <input type="number" class="form-control" name="valor" placeholder="Ingrese el valor del curso" required>
 			</div>
+			<div class="form-group">
+			    <label for="modalidad">Modalidad</label>
+			    <input type="text" class="form-control" name="modalidad" placeholder="Ingrese la modalidad del curso" required>
+  			</div>
+  			<div class="form-group">
+			    <label for="intensidad">Intensidad</label>
+			    <input type="text" class="form-control" name="intensidad" placeholder="Ingrese la intensidad horaria del curso" required>
+  			</div>
   			<button type="submit" class="btn btn-primary">Crear curso</button>
 		</form>
 

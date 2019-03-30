@@ -52,9 +52,14 @@ app.get('/coordinador/crearCurso', function (req, res) {
 });
 
 app.get('/coordinador/cursoCreado', function (req, res) {
+	id = parseInt(req.query.id);
+	nombre = req.query.nombre;
+	descripcion = req.query.descripcion;
+	valor = parseInt(req.query.valor);
+	modalidad = req.query.modalidad;
+	intensidad = req.query.intensidad;
 	
-
-
+	funciones.crearCurso(id, nombre, descripcion, valor, modalidad, intensidad);
 	
 	console.log('curso creado');
   	res.render('usuario/coordinador/cursos.hbs',{id:idingreso})

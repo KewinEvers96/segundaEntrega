@@ -24,14 +24,14 @@ hbs.registerHelper('verificar', (id)=>{
 
 hbs.registerHelper('listarDisponibles', () =>{
     cursosDisponibles = funciones.mostrarCursosDisponibles();
-    tablaT = "<table border=1><thead>\
-    <th>Código</th>\
-    <th>Nombre curso</th>\
-    <th>Descripción</th>\
-    <th>Valor</th>\
-    <th>Estado</th>\
-    <th>Modalidad</th>\
-    <th>Intensidad horaria</th>\
+    tablaT = "<table border=1 class='table'><thead class='thead-dark'>\
+    <th scope='col'>Código</th>\
+    <th scope='col'>Nombre curso</th>\
+    <th scope='col'>Descripción</th>\
+    <th scope='col'>Valor</th>\
+    <th scope='col'>Estado</th>\
+    <th scope='col'>Modalidad</th>\
+    <th scope='col'>Intensidad horaria</th>\
     </thead><tbody>";
 
     cursosDisponibles.forEach(curso => {
