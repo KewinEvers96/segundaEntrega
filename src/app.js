@@ -32,19 +32,27 @@ app.set('view engine', 'hbs');
 
 
 
-app.get('/coordinador/index', function (req, res) {
-	id = parseInt(req.query.document);
-	console.log('index aspirante');
-  	res.render('usuario/aspirante/index.hbs',{id:idingreso})
+app.get('/coordinador/home', function (req, res) {
+	console.log('home coordinador');
+  	res.render('usuario/coordinador/home.hbs',{id:idingreso})
 });
 
-app.get('/aspirante/index', function (req, res) {
-	id = parseInt(req.query.document);
-	console.log('index aspirante');
-  	res.render('usuario/aspirante/index.hbs',{id:idingreso})
+app.get('/coordinador/cursos', function (req, res) {
+	console.log('cursos coordinador');
+  	res.render('usuario/coordinador/cursos.hbs',{id:idingreso})
 });
 
+////////////////////////////////////////////////////////////////////////////////////////////
 
+app.get('/aspirante/home', function (req, res) {
+	console.log('home aspirante');
+  	res.render('usuario/aspirante/home.hbs',{id:idingreso})
+});
+
+app.get('/aspirante/cursos', function (req, res) {
+	console.log('cursos aspirante');
+  	res.render('usuario/aspirante/cursos.hbs',{id:idingreso})
+});
 
 
 
@@ -95,12 +103,12 @@ app.get('/requestLogin', function (req, res) {
             case "aspirante":
             	console.log('ingreso aspirante');
             	idingreso = id;
-            	res.render('usuario/aspirante/index.hbs',{id:idingreso})
+            	res.render('usuario/aspirante/home.hbs',{id:idingreso})
             break;
             case "coordinador":
             	console.log('ingreso coordinador');
             	idingreso = id;
-            	res.render('usuario/coordinador/index.hbs',{id:idingreso})
+            	res.render('usuario/coordinador/home.hbs',{id:idingreso})
             // Codigo
             break;
         }
