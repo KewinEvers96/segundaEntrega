@@ -19,7 +19,7 @@ const registrar = (_nombre, _id, _correo, _telefono) => {
         telefono:_telefono,
         tipoUsuario:"aspirante"
     }
-    let duplicado = listaUsuarios.find(buscar => buscar.id == usuario.nombre);
+    let duplicado = listaUsuarios.find(buscar => buscar.id == usuario.id);
     if(!duplicado){// si el usuario no está duplicado
         listaUsuarios.push(usuario);
         guardar("./src/usuarios.json");
