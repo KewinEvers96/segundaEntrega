@@ -3,6 +3,7 @@ const app = express();
 const path = require('path');
 const hbs = require('hbs');
 const funciones = require('./funciones');
+const fs = require('fs');
 
 
 
@@ -11,17 +12,16 @@ const funciones = require('./funciones');
 
 
 
-
 app.set('view engine', 'hbs');
 
 
 app.get('/registered', function (req, res) {
-	nombre: req.query.name
-	id: req.query.document
-	correo: req.query.email
-	telefono: parseInt(req.query.phoneNumber)
+	nombre = req.query.name;
+	id = req.query.document;
+	correo = req.query.email;
+	telefono = parseInt(req.query.phoneNumber);
 
-	funciones.registrar(nombre, id, correo, telefono)
+	registrar(nombre, id, correo, telefono);
   	res.render('login.hbs')
 });
 
