@@ -7,6 +7,7 @@ const fs = require('fs');
 
 
 
+
 //const directioriopublico = path.join(__dirname, '../public/img');
 const directioriopartials = path.join(__dirname, '../partials');
 //app.use(express.static(directioriopublico));
@@ -15,7 +16,6 @@ hbs.registerPartials(directioriopartials);
 app.set('view engine', 'hbs');
 
 require('./helpers');
-
 
 
 
@@ -58,9 +58,9 @@ app.get('/coordinador/cursoCreado', function (req, res) {
 	valor = parseInt(req.query.valor);
 	modalidad = req.query.modalidad;
 	intensidad = req.query.intensidad;
-	
+
 	funciones.crearCurso(id, nombre, descripcion, valor, modalidad, intensidad);
-	
+
 	console.log('curso creado');
   	res.render('usuario/coordinador/cursos.hbs',{id:idingreso})
 });
@@ -77,6 +77,14 @@ app.get('/aspirante/cursos', function (req, res) {
   	res.render('usuario/aspirante/cursos.hbs',{id:idingreso})
 });
 
+app.get('/aspirante/inscripcion', function (req, res) {
+	idCurso = parseInt(req.query.idCurso);
+
+
+
+	console.log('inscripcion aspirante');
+  	res.render('usuario/aspirante/inscripcion.hbs',{id:idingreso})
+});
 
 
 
