@@ -2,11 +2,13 @@
     "idCurso":1001,
     "nombre": "Curso básico node",
     "descripcion":"Curso básico node",
-    "valor":300000
+    "valor":300000,
+    "estado":"disponible"
 },
 {
     "idCurso":1002,
     "nombre":"Python avanzado para ingenieros",
     "descripcion":"Curso para ingenieros que sepan de python básico",
-    "valor":450000
+    "valor":450000,
+    "estado":"cerrado"
 }]
