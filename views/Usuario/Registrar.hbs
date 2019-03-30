@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<head>
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</head>
+<body>
+	<br>
+	<h5>Crear Usuario</h5>
+	<br>
+	<div class="container">
+		<form action="/" method="POST">
+	  		<div class="form-group">
+	    		<label for="documentoIdentidad">Documento de identidad</label>
+	   	 		<input type="number" class="form-control" id="documentoIdentidad" placeholder="Ingrese el documento de identidad">
+	  		</div>
+	  		<div class="form-group">
+	    		<label for="exampleInputPassword1">Nombre</label>
+	    		<input type="text" class="form-control" id="name" placeholder="Ingrese el nombre">
+	  		</div>
+	  		<div class="form-group">
+	    		<label for="email">Correo electrónico</label>
+	    		<input type="email" class="form-control" id="email" placeholder="ejemplo@mimail.com">
+	  		</div>
+	  		<div class="form-check">
+	  			<label class="form-check-label" for="phoneNumber">Teléfono</label>
+	    		<input type="number" class="form-check-input" id="phoneNumber">
+	  		</div>
+	  		<button type="submit" class="btn btn-primary">Crear</button>
+		</form>	
+	</div>
+</body>

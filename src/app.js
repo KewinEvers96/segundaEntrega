@@ -6,17 +6,22 @@ const hbs = require('hbs');
 
 
 
-const directioriopublico = path.join(__dirname, '../public/img');
-app.use(express.static(directioriopublico));
+//const directioriopublico = path.join(__dirname, '../public/img');
+//app.use(express.static(directioriopublico));
 
 
 
 
 app.set('view engine', 'hbs');
 
+app.get('/login', function (req, res) {
+  res.render('index.hbs')
+});
+
+
 app.get('/', function (req, res) {
-  res.render('index')
-})
+  res.render('index.hbs')
+});
 
 
 app.listen(3000, () => {
