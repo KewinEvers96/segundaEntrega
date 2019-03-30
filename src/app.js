@@ -150,8 +150,16 @@ app.get('/login', function (req, res) {
   res.render('login.hbs')
 });
 
+app.get('/oferta', function (req, res) {
+  res.render('oferta.hbs')
+});
+
+app.get('/index', function (req, res) {
+  res.render('index.hbs')
+});
+
 app.get('/', function (req, res) {
-  res.render('login.hbs')
+  res.render('index.hbs')
 });
 
 
