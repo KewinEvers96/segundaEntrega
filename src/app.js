@@ -18,8 +18,6 @@ app.get('/registered', function (req, res) {
 	id = parseInt(req.query.document);
 	correo = req.query.email;	
 	telefono = parseInt(req.query.phoneNumber);
-	console.log(id)
-	console.log(nombre)
 
 	funciones.registrar(nombre, id, correo, telefono);
   	res.render('login.hbs')
