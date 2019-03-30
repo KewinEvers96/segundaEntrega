@@ -58,7 +58,7 @@ const crearCurso = (_id, _nombre, _descripcion, _valor, _modalidad, _intensidad 
         intensidad:_intensidad,
         estado:"disponible"
     }
-    let duplicado = listaCursos.find(cur => cur.idCurso == curso.id);
+    let duplicado = listaCursos.find(cur => cur.idCurso == curso.idCurso);
 
     if(!duplicado){
         listaCursos.push(curso);

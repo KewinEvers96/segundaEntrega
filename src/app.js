@@ -14,7 +14,7 @@ hbs.registerPartials(directioriopartials);
 
 app.set('view engine', 'hbs');
 
-
+require('./helpers');
 
 
 
