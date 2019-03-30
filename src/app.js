@@ -15,7 +15,7 @@ const hbs = require('hbs');
 app.set('view engine', 'hbs');
 
 app.get('/login', function (req, res) {
-  res.render('index.hbs')
+  res.render('login.hbs')
 });
 
 
