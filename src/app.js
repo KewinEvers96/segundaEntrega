@@ -14,13 +14,29 @@ const hbs = require('hbs');
 
 app.set('view engine', 'hbs');
 
-app.get('/login', function (req, res) {
+
+app.get('/registered', function (req, res) {
+
   res.render('login.hbs')
 });
 
 
+
+
+app.get('/register', function (req, res) {
+  res.render('usuario/registrar.hbs')
+});
+
+app.get('/index', function (req, res) {
+  res.render('login.hbs')
+});
+
+app.get('/login', function (req, res) {
+  res.render('login.hbs')
+});
+
 app.get('/', function (req, res) {
-  res.render('index.hbs')
+  res.render('login.hbs')
 });
 
 
