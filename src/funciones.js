@@ -9,16 +9,6 @@ const listar = () => {
     }
 };
 
-// Lista los cursos
-const leerCursos = () => {
-    try {
-        listaCursos = require('./cursos.json');
-    }
-    catch(error){// Si el archivo no existe
-        listaCursos = [];
-    }
-}
-
 const registrar = (_nombre, _id, _correo, _telefono) => {
     listar();// Llama la lista de documentos
     let usuario= {
@@ -46,6 +36,35 @@ const guardar = (nombreArchivo,lista) => {
         console.log('Archivo guardado')
     });
 }
+// =====================
+// Funciones para cursos
+// =====================
+
+// BUSCAR un curso dado un codigo
+const buscarCurso = (codigo) => {
+    leerCursos();
+    let encontrado = listaCursos.find(buscar => buscar.idCurso == codigo);
+    if(!encontrado){
+        // ======================
+        // NO ENCONTRÓ EL CURSO
+        console.log("El curso con código "+ codigo + " no existe");
+        return -1;
+    }
+    else{
+        return encontrado;
+    }
+}
+
+// Lista los cursos
+const leerCursos = () => {
+    try {
+        listaCursos = require('./cursos.json');
+    }
+    catch(error){// Si el archivo no existe
+        listaCursos = [];
+    }
+}
+
 // Creación de un nuevo curso
 const crearCurso = (_id, _nombre, _descripcion, _valor, _modalidad, _intensidad ) => {
     leerCursos();
@@ -76,11 +95,57 @@ const mostrarCursosDisponibles = () =>
     let listaCursoDisponibles = listaCursos.filter(cur => cur.estado == "disponible");
     return listaCursoDisponibles;
 }
+
+// ===================================================
+// Funciones para actualización de datos de aspirantes
+// ===================================================
+
+// agregarCursoEstudiante
+const agregarCurso = (id_curso,id_estudiante) => {
+    listar();
+    let aspiranteEncontrado = listaUsuarios.find(buscar => buscar.id == id_estudiante);
+    let curso = buscarCurso(id_curso);
+
+    if(!aspiranteEncontrado){
+        // aspirante con ese codigo no encontrado
+        console.log('Estudiante no existe');
+        return -1;
+    }   
+    else{
+        if(curso == -1){
+            // No encontró el curso
+            console.log('Curso no existe');
+            return -1;
+        }
+        else{
+            cursosAspirante = aspiranteEncontrado.cursos;
+            if(cursosAspirante  == undefined){
+                cursosAspirante = [];
+            }
+        }
+    }
+
+    let duplicado = cursosAspirante.find(buscar => buscar.idCurso ==id_curso);
+
+    if(!duplicado){
+        cursosAspirante.push(curso);
+        aspiranteEncontrado.cursos = cursosAspirante;
+        guardar('./src/usuarios.json',listaUsuarios);
+        return 1;
+    }
+    else{
+        // encontro un curso con código igual
+        console.log("Error curso duplicado");
+        return -1;
+    }
+}
+
 module.exports = {
     listar, 
     registrar,
     guardar,
     crearCurso,
     leerCursos,
-    mostrarCursosDisponibles
+    mostrarCursosDisponibles,
+    agregarCurso
 }
