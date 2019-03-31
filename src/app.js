@@ -72,12 +72,13 @@ app.get('/coordinador/cerrarCurso', function (req, res) {
 
 app.get('/coordinador/verCurso', function (req, res) {
   idCurso = parseInt(req.query.idCurso);
-  
-  console.log('ver curso disponible');
-  res.render('usuario/coordinador/verCursoDisponible.hbs',{id:idingreso, idCurso:idCurso})
-
-  //console.log('ver curso cerrado');
-  //res.render('usuario/coordinador/verCursoCerrado.hbs',{id:idingreso, idCurso:idCurso})
+  if (funciones.verificarCurso(idCurso)) {
+    console.log('ver curso disponible');
+    res.render('usuario/coordinador/verCursoDisponible.hbs',{id:idingreso, idCurso:idCurso})
+  }else{
+    console.log('ver curso cerrado');
+    res.render('usuario/coordinador/verCursoCerrado.hbs',{id:idingreso, idCurso:idCurso})
+  }
 });
 
 ////////////////////////////////////////////////////////////////////////////////////////////
