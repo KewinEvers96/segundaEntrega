@@ -1,71 +1,71 @@
 [
- {
-  "id": 1001,
-  "nombre": "Alberto Cardenas",
-  "correo": "albertoCar@hotmail",
-  "telefono": 41320402,
-  "tipoUsuario": "coordinador"
- },
- {
-  "id": 99999,
-  "nombre": "lolita",
-  "correo": "lola@lelo.com",
-  "telefono": 777777777,
-  "tipoUsuario": "docente",
-  "cursos": [
    {
-    "idCurso": 239292,
-    "nombre": "Fundamentos programación",
-    "descripcion": "Es un curso básico de programación en C, dónde se pretende enseñar al estudiante nociones básicas de programación.",
-    "valor": 300000,
-    "modalidad": "virtual",
-    "intensidad": "12 horas por semana",
-    "estado": "disponible"
+      "id": 1001,
+      "nombre": "Alberto Cardenas",
+      "correo": "albertoCar@hotmail",
+      "telefono": 41320402,
+      "tipoUsuario": "coordinador"
    },
    {
-    "idCurso": 82832831,
-    "nombre": "Sistemas Numéricos",
-    "descripcion": "Cursos de sistemas numéricos.",
-    "valor": 232144232,
-    "modalidad": "Presencial",
-    "intensidad": "32 horas por mes",
-    "estado": "disponible"
-   }
-  ]
- },
- {
-  "id": 11111,
-  "nombre": "kkkk",
-  "correo": "mmm@ff.com",
-  "telefono": 4313213,
-  "tipoUsuario": "aspirante",
-  "cursos": [
-   {
-    "idCurso": 239292,
-    "nombre": "Fundamentos programación",
-    "descripcion": "Es un curso básico de programación en C, dónde se pretende enseñar al estudiante nociones básicas de programación.",
-    "valor": 300000,
-    "modalidad": "virtual",
-    "intensidad": "12 horas por semana",
-    "estado": "disponible"
+      "id": 99999,
+      "nombre": "lolita",
+      "correo": "lola@lelo.com",
+      "telefono": 777777777,
+      "tipoUsuario": "docente",
+      "cursos": [
+         {
+            "idCurso": 239292,
+            "nombre": "Fundamentos programación",
+            "descripcion": "Es un curso básico de programación en C, dónde se pretende enseñar al estudiante nociones básicas de programación.",
+            "valor": 300000,
+            "modalidad": "virtual",
+            "intensidad": "12 horas por semana",
+            "estado": "disponible"
+         },
+         {
+            "idCurso": 82832831,
+            "nombre": "Sistemas Numéricos",
+            "descripcion": "Cursos de sistemas numéricos.",
+            "valor": 232144232,
+            "modalidad": "Presencial",
+            "intensidad": "32 horas por mes",
+            "estado": "disponible"
+         }
+      ]
    },
    {
-    "idCurso": 82832831,
-    "nombre": "Sistemas Numéricos",
-    "descripcion": "Cursos de sistemas numéricos.",
-    "valor": 232144232,
-    "modalidad": "Presencial",
-    "intensidad": "32 horas por mes",
-    "estado": "disponible"
+      "id": 11111,
+      "nombre": "carlos",
+      "correo": "ardila@unal.edu.co",
+      "telefono": 32164422,
+      "tipoUsuario": "aspirante",
+      "cursos": [
+         {
+            "idCurso": 82832831,
+            "nombre": "Sistemas Numéricos",
+            "descripcion": "Cursos de sistemas numéricos.",
+            "valor": 232144232,
+            "modalidad": "Presencial",
+            "intensidad": "32 horas por mes",
+            "estado": "disponible"
+         },
+         {
+            "idCurso": 1223,
+            "nombre": "Programacion Orientada a Objetos",
+            "descripcion": "ay no por dios, es guzman",
+            "valor": 800000,
+            "modalidad": "presencial",
+            "intensidad": "la que usted quiera",
+            "estado": "disponible"
+         }
+      ]
+   },
+   {
+      "id": 2002,
+      "nombre": "harold",
+      "correo": "harolito@meme.com",
+      "telefono": 77123123,
+      "tipoUsuario": "aspirante",
+      "cursos": []
    }
-  ]
- },
- {
-  "id": 2002,
-  "nombre": "harold",
-  "correo": "harolito@meme.com",
-  "telefono": 77123123,
-  "tipoUsuario": "aspirante",
-  "cursos": []
- }
 ]

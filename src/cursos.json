@@ -1,74 +1,69 @@
 [
- {
-  "idCurso": 1001,
-  "nombre": "Curso básico node",
-  "descripcion": "Curso básico node",
-  "valor": 300000,
-  "estado": "cerrado",
-  "aspirantes": [
    {
-    "id": 11111,
-    "nombre": "kkkk",
-    "correo": "mmm@ff.com",
-    "telefono": 4313213
-   }
-  ]
- },
- {
-  "idCurso": 239292,
-  "nombre": "Fundamentos programación",
-  "descripcion": "Es un curso básico de programación en C, dónde se pretende enseñar al estudiante nociones básicas de programación.",
-  "valor": 300000,
-  "modalidad": "virtual",
-  "intensidad": "12 horas por semana",
-  "estado": "cerrado",
-  "aspirantes": [
-   {
-    "id": 99999,
-    "nombre": "lola",
-    "correo": "lola@lelo.com",
-    "telefono": 11111
+      "idCurso": 1001,
+      "nombre": "Curso básico node",
+      "descripcion": "Curso básico node",
+      "valor": 300000,
+      "estado": "cerrado",
+      "aspirantes": []
    },
    {
-    "id": 11111,
-    "nombre": "kkkk",
-    "correo": "mmm@ff.com",
-    "telefono": 4313213
-   }
-  ]
- },
- {
-  "idCurso": 82832831,
-  "nombre": "Sistemas Numéricos",
-  "descripcion": "Cursos de sistemas numéricos.",
-  "valor": 232144232,
-  "modalidad": "Presencial",
-  "intensidad": "32 horas por mes",
-  "estado": "cerrado",
-  "aspirantes": [
-   {
-    "id": 99999,
-    "nombre": "lola",
-    "correo": "lola@lelo.com",
-    "telefono": 11111
+      "idCurso": 239292,
+      "nombre": "Fundamentos programación",
+      "descripcion": "Es un curso básico de programación en C, dónde se pretende enseñar al estudiante nociones básicas de programación.",
+      "valor": 300000,
+      "modalidad": "virtual",
+      "intensidad": "12 horas por semana",
+      "estado": "cerrado",
+      "aspirantes": [
+         {
+            "id": 99999,
+            "nombre": "lola",
+            "correo": "lola@lelo.com",
+            "telefono": 11111
+         }
+      ]
    },
    {
-    "id": 11111,
-    "nombre": "kkkk",
-    "correo": "mmm@ff.com",
-    "telefono": 4313213,
-    "tipoUsuario": "aspirante"
+      "idCurso": 82832831,
+      "nombre": "Sistemas Numéricos",
+      "descripcion": "Cursos de sistemas numéricos.",
+      "valor": 232144232,
+      "modalidad": "Presencial",
+      "intensidad": "32 horas por mes",
+      "estado": "cerrado",
+      "aspirantes": [
+         {
+            "id": 99999,
+            "nombre": "lola",
+            "correo": "lola@lelo.com",
+            "telefono": 11111
+         },
+         {
+            "id": 11111,
+            "nombre": "carlos",
+            "correo": "ardila@unal.edu.co",
+            "telefono": 32164422,
+            "tipoUsuario": "aspirante"
+         }
+      ]
+   },
+   {
+      "idCurso": 1223,
+      "nombre": "Programacion Orientada a Objetos",
+      "descripcion": "ay no por dios, es guzman",
+      "valor": 800000,
+      "modalidad": "presencial",
+      "intensidad": "la que usted quiera",
+      "estado": "disponible",
+      "aspirantes": [
+         {
+            "id": 11111,
+            "nombre": "carlos",
+            "correo": "ardila@unal.edu.co",
+            "telefono": 32164422,
+            "tipoUsuario": "aspirante"
+         }
+      ]
    }
-  ]
- },
- {
-  "idCurso": 1223,
-  "nombre": "Programacion Orientada a Objetos",
-  "descripcion": "ay no por dios, es guzman",
-  "valor": 800000,
-  "modalidad": "presencial",
-  "intensidad": "la que usted quiera",
-  "estado": "disponible",
-  "aspirantes": []
- }
 ]
