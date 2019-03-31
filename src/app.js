@@ -112,10 +112,7 @@ app.get('/coordinador/usuarioEditado', function (req, res) {
   email = req.query.email;
   phoneNumber = parseInt(req.query.phoneNumber);
   tipoUsuario = req.query.tipoUsuario;
-
-  
-
-
+  funciones.actualizarAspirante(idUsuario, name, email, phoneNumber, tipoUsuario);
   console.log('usuario editado');
     res.render('usuario/coordinador/usuarios.hbs',{id:idingreso})
 });
