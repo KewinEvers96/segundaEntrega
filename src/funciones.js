@@ -30,7 +30,7 @@ const registrar = (_nombre, _id, _correo, _telefono) => {
 
 
 const guardar = (nombreArchivo,lista) => {
-    let datos = JSON.stringify(lista,null, " ");
+    let datos = JSON.stringify(lista, null, "   ");
     fs.writeFile(nombreArchivo, datos, (err)=>{
         if (err) throw (err);
         console.log('Archivo guardado')
@@ -267,21 +267,53 @@ const eliminarAspirante = (id_aspirante, id_curso) =>{
     }
 
 }
+// =======================
+// Codigos de los cursos donde están el estudiante 
+// =======================
+const codigos_cursos = id => {
+    cursosAspirante = mostrarCursosAspirante(id);
+    let codigos = [];
+    cursosAspirante.forEach(curso => {
+        codigos.push(curso.idCurso);
+    });
+    return codigos;
+}
+
+
+const updateAspirante = (id_aspirante, id_curso, aspirante) =>{
+    leerCursos();
+    let curso = listaCursos.find(buscar => buscar.idCurso == id_curso);
+
+    if(!curso){
+        console.log('Curso no encontrado');
+    }
+    else{
+        aspirantes = curso.aspirantes;
+        let sobrantes = aspirantes.filter(filtro => filtro.id != id_aspirante);
+        let nuevoAspirante = {
+            id:aspirante.id,
+            nombre:aspirante.nombre,
+            correo:aspirante.correo,
+            telefono:aspirante.telefono,
+            tipoUsuario:aspirante.tipoUsuario
+        }
+        sobrantes.push(nuevoAspirante);
+        curso.aspirantes = sobrantes;
+        guardar('./src/cursos.json',listaCursos);
+    }
+
+}
 // ============================================
 // ACTUALIZCION CURSO:
 // Solo un estudiante
 // ============================================
 
-const actualizarCurso =  aspirante => {
+const actualizarCurso =  (idAspirante,aspirante) => {
     leerCursos();
-    let cursosConElAspirante = listaCursos.filter(filtro => filtro.aspirantes.id == aspirante.id);
-    cursosConElAspirante.forEach(curso => {
-        aspirantes = curso.aspirantes;
-        asp = aspirantes.find(buscar => buscar.id == aspirante.id);
-        asp = aspirante;
+    codigos = codigos_cursos(idAspirante);
+    codigos.forEach(codigo => {
+        updateAspirante(idAspirante,codigo, aspirante);
     });
-
-    guardar('./src/cursos.json', listaCursos);
 }
 
 // =============================================
@@ -310,7 +342,7 @@ const actualizarAspirante = (id_aspirante, nombreNuevo, correoNuevo, telefonoNue
             aspiranteActualizar.tipoUsuario = tipo;
         }
         guardar('./src/usuarios.json', listaUsuarios);
-        actualizarCurso(aspiranteActualizar);
+        actualizarCurso(aspiranteActualizar.id, aspiranteActualizar);
         return 1;
     }
 }
