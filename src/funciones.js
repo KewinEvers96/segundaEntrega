@@ -64,13 +64,46 @@ const leerCursos = () => {
         listaCursos = [];
     }
 }
+
+// IDS DE LOS ASPIRANTES DONDE ESTAN EL CURSO
+const id_aspirantes = idCurso => {
+    aspirantes = mostrarAspirantesCurso(idCurso);
+    let ids = [];
+    aspirantes.forEach(aspirante =>{
+        ids.push(aspirante.id);
+    });
+
+    return ids;
+}
 // ========================================
 // CERRAR CURSO PARA CADA ESTUDIANTE 
 // ========================================
 
-const recorrerCursosActualizar = idCurso =>{
+const recorrerCursosActualizar = (idCurso,ncurso) =>{
     listar();
-    
+    ids = id_aspirantes(idCurso);
+    ids.forEach(id => {
+        let aspirante = listaUsuarios.find(buscar => buscar.id == id);
+        if(!aspirante){
+            console.log('Aspirante no encontrado');
+        }
+        else{
+            cursos = aspirante.cursos;
+            let sobrantes = cursos.filter(filtro => filtro.idCurso != idCurso);
+            let nuevoCurso = {
+                idCurso:ncurso.idCurso,
+                nombre:ncurso.nombre, 
+                descripcion:ncurso.descripcion,
+                valor:ncurso.valor,
+                modalidad:ncurso.modalidad,
+                intensidad:ncurso.intensidad,
+                estado:ncurso.estado
+            };
+            sobrantes.push(nuevoCurso);
+            aspirante.cursos = sobrantes;
+        }
+    });
+    guardar('./src/usuarios.json', listaUsuarios);
 }
 
 // CERRAR CURSO SOLO EN CURSO 
@@ -78,6 +111,7 @@ const cerrarCurso= id_curso => {
     leerCursos();
     let cursoEncontrado = listaCursos.find(buscar => buscar.idCurso == id_curso);
     cursoEncontrado.estado = "cerrado";
+    recorrerCursosActualizar(id_curso, cursoEncontrado);
     guardar('./src/cursos.json', listaCursos);
 }
 // LISTAR ASPIRANTES A UN CURSO 
