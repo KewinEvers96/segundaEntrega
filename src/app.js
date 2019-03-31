@@ -100,6 +100,12 @@ app.get('/coordinador/usuarios', function (req, res) {
     res.render('usuario/coordinador/usuarios.hbs',{id:idingreso})
 });
 
+app.get('/coordinador/editarUsuario', function (req, res) {
+  idUsuario = parseInt(req.query.idUsuario);
+  console.log('editar usuario');
+    res.render('usuario/coordinador/editarUsuario.hbs',{id:idingreso, idUsuario:idUsuario})
+});
+
 ////////////////////////////////////////////////////////////////////////////////////////////
 
 app.get('/aspirante/home', function (req, res) {

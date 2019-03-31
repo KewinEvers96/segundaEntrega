@@ -206,4 +206,32 @@ hbs.registerHelper('mostrarAspirantes', (idCurso) => {
 
     return tablaT;
 });
-    
+
+
+hbs.registerHelper('listarUsuarios', () =>{
+    listaUsuarios = require('./usuarios.json');
+    tablaT = "<table border=1 class='table table-hover'><thead class='thead-dark'>\
+    <th scope='col'>Identificación</th>\
+    <th scope='col'>Nombre</th>\
+    <th scope='col'>Correo</th>\
+    <th scope='col'>Telefono</th>\
+    <th scope='col'>Tipo de usuario</th>\
+    <th scope='col'> </th>\
+    </thead><tbody>";
+
+    listaUsuarios.forEach(usuario => {
+       tablaT = tablaT +  "<tr><td>" + usuario.id + 
+        "</td><td>" + usuario.nombre + 
+        "</td><td>" + usuario.correo + 
+        "</td><td>" + usuario.telefono + 
+        "</td><td>" + usuario.tipoUsuario + 
+        "</td><td><form action='/coordinador/editarUsuario' method='get'>" +
+        "<input type='hidden' name='idUsuario' value='" + usuario.id + 
+        "'><button class='btn btn-outline-dark'>Editar</button></form>"
+        "</td></tr>";
+    });
+
+    tablaT = tablaT + "</tbody><table>";
+
+    return tablaT;
+});
