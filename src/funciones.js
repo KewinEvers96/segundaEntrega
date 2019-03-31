@@ -70,6 +70,20 @@ const cerrarCurso= idCurso => {
     let cursoEncontrado = listaCursos.find(buscar => buscar.idCurso = idCurso);
     cursoEncontrado.estado = "cerrado";
 }
+
+
+// VERIFICAR UN CURSO
+
+const verificarCurso = idCurso => {
+    leerCursos();
+    let cursoAVerificar = listaCursos.find(buscar => buscar.idCurso == idCurso);
+    if(cursoAVerificar.estado == "disponible"){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
 // Creación de un nuevo curso
 const crearCurso = (_id, _nombre, _descripcion, _valor, _modalidad, _intensidad ) => {
     leerCursos();
@@ -208,5 +222,6 @@ module.exports = {
     mostrarCursosDisponibles,
     agregarCurso,
     buscarCurso,
-    mostrarCursosAspirante
+    mostrarCursosAspirante,
+    verificarCurso
 }
