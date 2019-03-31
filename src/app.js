@@ -70,15 +70,15 @@ app.get('/coordinador/cerrarCurso', function (req, res) {
     res.render('usuario/coordinador/cerrarCurso.hbs',{id:idingreso})
 });
 
-app.get('/coordinador/inscritos', function (req, res) {
+app.get('/coordinador/verCurso', function (req, res) {
   idCurso = parseInt(req.query.idCurso);
   
+  console.log('ver curso disponible');
+  res.render('usuario/coordinador/verCursoDisponible.hbs',{id:idingreso, idCurso:idCurso})
 
-
-  console.log('inscritos a curso');
-    res.render('usuario/coordinador/inscritos.hbs',{id:idingreso, idCurso:idCurso})
+  console.log('ver curso cerrado');
+  res.render('usuario/coordinador/verCursoCerrado.hbs',{id:idingreso, idCurso:idCurso})
 });
-
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 

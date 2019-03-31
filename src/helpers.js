@@ -130,7 +130,7 @@ hbs.registerHelper('listarCursos', () =>{
 
     listaCursos.forEach(curso => {
        tablaT = tablaT +  "<tr><td>" + curso.idCurso + 
-        "</td><td><form action='/coordinador/inscritos' method='get'>" +
+        "</td><td><form action='/coordinador/verCurso' method='get'>" +
         "<input type='hidden' name='idCurso' value='" + curso.idCurso + 
         "'><button class='btn btn-outline-dark'>" + curso.nombre + "</button></form>" +
         "</td><td>" + curso.descripcion + 

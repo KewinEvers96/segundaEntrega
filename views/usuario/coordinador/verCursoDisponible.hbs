@@ -11,21 +11,18 @@
 			</form>
 		<br>
 
-		{{{cerrarCurso}}}
+		<form action='/coordinador/cerrarCurso' method='get'> 
+        	<input type='hidden' name='idCurso' value='{{idCurso}}'>
+        	<button class='btn btn-outline-secondary'>Cerrar curso</button>
+    	</form>
 
-
-		{{#if }}
-    		<h1>{{firstName}} {{lastName}}</h1>
-  		{{else}}
-    		<h1>Unknown Author</h1>
-  		{{/if}}
-
+    	<br>";
 
 		"</td><td><form action='/coordinador/cerrarCurso' method='get'>" + 
         "<input type='hidden' name='idCurso' value='" + curso.idCurso + 
         "'><button class='btn btn-outline-secondary'>Cerrar curso</button></form></td></tr>";
 
-
+        
 
 	</div>
 </body>
