@@ -166,5 +166,6 @@ module.exports = {
     leerCursos,
     mostrarCursosDisponibles,
     agregarCurso,
-    buscarCurso
+    buscarCurso,
+    mostrarCursosAspirante
 }
