@@ -237,3 +237,72 @@ hbs.registerHelper('listarUsuarios', () =>{
 
     return tablaT;
 });
+
+
+hbs.registerHelper('listarDisponiblesDocente', () =>{
+    cursosDisponibles = funciones.mostrarCursosDisponibles();
+    tablaT = "<table border=1 class='table'><thead class='thead-dark'>\
+    <th scope='col'>Código</th>\
+    <th scope='col'>Nombre curso</th>\
+    <th scope='col'>Descripción</th>\
+    <th scope='col'>Valor</th>\
+    <th scope='col'>Estado</th>\
+    <th scope='col'>Modalidad</th>\
+    <th scope='col'>Intensidad horaria</th>\
+    <th scope='col'> </th>\
+    </thead><tbody>";
+
+    cursosDisponibles.forEach(curso => {
+
+
+       tablaT = tablaT +  "<tr><td>" + curso.idCurso +
+        "</td><td>" + curso.nombre + 
+        "</td><td>" + curso.descripcion + 
+        "</td><td>" + curso.valor + 
+        "</td><td>" + curso.estado + 
+        "</td><td>" + curso.modalidad + 
+        "</td><td>" + curso.intensidad+
+        "</td><td><form action='/docente/inscripcion' method='get'>" + 
+        "<input type='hidden' name='idCurso' value='" + curso.idCurso + 
+        "'><input type='hidden' name='idAspirante' value='" + appp.idingreso + 
+        "'><button class='btn btn-outline-secondary'>Inscribirse</button></form></td></tr>";
+    });
+
+    tablaT = tablaT + "</tbody><table>";
+
+    return tablaT;
+});
+
+
+
+hbs.registerHelper('misCursosDocente', codigo => {
+    listaCursos = funciones.mostrarCursosAspirante(codigo);
+    tablaT = "<table border=1 class='table table-hover'><thead class='thead-dark'>\
+    <th scope='col'>Código</th>\
+    <th scope='col'>Nombre curso</th>\
+    <th scope='col'>Descripción</th>\
+    <th scope='col'>Valor</th>\
+    <th scope='col'>Estado</th>\
+    <th scope='col'>Modalidad</th>\
+    <th scope='col'>Intensidad horaria</th>\
+    <th scope='col'> </th>\
+    </thead><tbody>";
+
+    listaCursos.forEach(curso => {
+       tablaT = tablaT +  "<tr><td>" + curso.idCurso +  
+       "</td><td>" + curso.nombre + 
+        "</td><td>" + curso.descripcion + 
+        "</td><td>" + curso.valor + 
+        "</td><td>" + curso.estado + 
+        "</td><td>" + curso.modalidad + 
+        "</td><td>" + curso.intensidad+
+        "</td><td><form action='/docente/eliminarCurso' method='get'>" +
+        "<input type='hidden' name='idCurso' value='" + curso.idCurso +  
+        "'><button class='btn btn-outline-dark'>Eliminar inscripción</button></form>"
+        "</td></tr>";
+    });
+
+    tablaT = tablaT + "</tbody><table>";
+
+    return tablaT;
+})

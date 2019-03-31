@@ -112,10 +112,7 @@ app.get('/coordinador/usuarioEditado', function (req, res) {
   email = req.query.email;
   phoneNumber = parseInt(req.query.phoneNumber);
   tipoUsuario = req.query.tipoUsuario;
-
-  
-
-
+  funciones.actualizarAspirante(idUsuario, name, email, phoneNumber, tipoUsuario);
   console.log('usuario editado');
     res.render('usuario/coordinador/usuarios.hbs',{id:idingreso})
 });
@@ -149,9 +146,33 @@ app.get('/aspirante/eliminarCurso', function (req, res) {
 });
 
 
+/////////////////////////////////////////////////////////////////////////////////////////
 
+app.get('/docente/home', function (req, res) {
+  console.log('home docente');
+    res.render('usuario/docente/home.hbs',{
+      id:idingreso
+    });
+});
 
+app.get('/docente/cursos', function (req, res) {
+  console.log('cursos docente');
+    res.render('usuario/docente/cursos.hbs',{id:idingreso})
+});
 
+app.get('/docente/inscripcion', function (req, res) {
+  idCurso = parseInt(req.query.idCurso);
+  funciones.agregarCurso(idCurso, idingreso);
+  console.log('inscripcion docente');
+    res.render('usuario/docente/inscripcion.hbs',{id:idingreso})
+});
+
+app.get('/docente/eliminarCurso', function (req, res) {
+  idCurso = parseInt(req.query.idCurso);
+  funciones.eliminarCursoDeAspirante(idingreso, idCurso);
+  console.log('eliminar curso');
+    res.render('usuario/docente/home.hbs',{id:idingreso})
+});
 
 
 
@@ -202,6 +223,11 @@ app.get('/requestLogin', function (req, res) {
             	idingreso = id;
             	res.render('usuario/coordinador/home.hbs',{id:idingreso})
             // Codigo
+            break;
+            case "docente":
+              console.log('ingreso docente');
+              idingreso = id;
+              res.render('usuario/docente/home.hbs',{id:idingreso})
             break;
         }
     }
