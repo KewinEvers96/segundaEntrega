@@ -147,6 +147,35 @@ hbs.registerHelper('listarCursos', () =>{
 });
 
 
+
+hbs.registerHelper('misCursos', codigo => {
+    listaCursos = funciones.mostrarCursosAspirante(codigo);
+    tablaT = "<table border=1 class='table table-hover'><thead class='thead-dark'>\
+    <th scope='col'>Código</th>\
+    <th scope='col'>Nombre curso</th>\
+    <th scope='col'>Descripción</th>\
+    <th scope='col'>Valor</th>\
+    <th scope='col'>Estado</th>\
+    <th scope='col'>Modalidad</th>\
+    <th scope='col'>Intensidad horaria</th>\
+    </thead><tbody>";
+
+    listaCursos.forEach(curso => {
+       tablaT = tablaT +  "<tr><td>" + curso.idCurso +  
+       "</td><td>" + curso.nombre + 
+        "</td><td>" + curso.descripcion + 
+        "</td><td>" + curso.valor + 
+        "</td><td>" + curso.estado + 
+        "</td><td>" + curso.modalidad + 
+        "</td><td>" + curso.intensidad+
+        "</td></tr>";
+    });
+
+    tablaT = tablaT + "</tbody><table>";
+
+    return tablaT;
+})
+
 hbs.registerHelper('cerrarCurso', () =>{
     if (idCurso == 'disponible') {
         code = "<form action='/coordinador/cerrarCurso' method='get'>" + 
