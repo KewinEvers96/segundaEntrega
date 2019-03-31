@@ -37,17 +37,14 @@ require('./helpers');
 
 
 app.get('/coordinador/home', function (req, res) {
-	console.log('home coordinador');
   	res.render('usuario/coordinador/home.hbs',{id:idingreso})
 });
 
 app.get('/coordinador/cursos', function (req, res) {
-	console.log('cursos coordinador');
   	res.render('usuario/coordinador/cursos.hbs',{id:idingreso})
 });
 
 app.get('/coordinador/crearCurso', function (req, res) {
-	console.log('crear curso');
   	res.render('usuario/coordinador/crearCurso.hbs',{id:idingreso})
 });
 
@@ -59,24 +56,20 @@ app.get('/coordinador/cursoCreado', function (req, res) {
 	modalidad = req.query.modalidad;
 	intensidad = req.query.intensidad;
 	funciones.crearCurso(id, nombre, descripcion, valor, modalidad, intensidad);
-	console.log('curso creado');
   	res.render('usuario/coordinador/cursos.hbs',{id:idingreso})
 });
 
 app.get('/coordinador/cerrarCurso', function (req, res) {
   idCurso = parseInt(req.query.idCurso);
   funciones.cerrarCurso(idCurso);
-  console.log('cerrar curso');
     res.render('usuario/coordinador/cerrarCurso.hbs',{id:idingreso})
 });
 
 app.get('/coordinador/verCurso', function (req, res) {
   idCurso = parseInt(req.query.idCurso);
   if (funciones.verificarCurso(idCurso)) {
-    console.log('ver curso disponible');
     res.render('usuario/coordinador/verCursoDisponible.hbs',{id:idingreso, idCurso:idCurso})
   }else{
-    console.log('ver curso cerrado');
     res.render('usuario/coordinador/verCursoCerrado.hbs',{id:idingreso, idCurso:idCurso})
   }
 });
@@ -85,24 +78,19 @@ app.get('/coordinador/eliminarDelCurso', function (req, res) {
   idCurso = parseInt(req.query.idCurso);
   idAspirante = parseInt(req.query.idAspirante);
   funciones.eliminarCursoDeAspirante(idAspirante,  idCurso);
-  console.log('eliminar del curso');
   if (funciones.verificarCurso(idCurso)) {
-    console.log('ver curso disponible');
     res.render('usuario/coordinador/verCursoDisponible.hbs',{id:idingreso, idCurso:idCurso})
   }else{
-    console.log('ver curso cerrado');
     res.render('usuario/coordinador/verCursoCerrado.hbs',{id:idingreso, idCurso:idCurso})
   }
 });
 
 app.get('/coordinador/usuarios', function (req, res) {
-  console.log('ver usuarios');
     res.render('usuario/coordinador/usuarios.hbs',{id:idingreso})
 });
 
 app.get('/coordinador/editarUsuario', function (req, res) {
   idUsuario = parseInt(req.query.idUsuario);
-  console.log('editar usuario');
     res.render('usuario/coordinador/editarUsuario.hbs',{id:idingreso, idUsuario:idUsuario})
 });
 
@@ -113,35 +101,30 @@ app.get('/coordinador/usuarioEditado', function (req, res) {
   phoneNumber = parseInt(req.query.phoneNumber);
   tipoUsuario = req.query.tipoUsuario;
   funciones.actualizarAspirante(idUsuario, name, email, phoneNumber, tipoUsuario);
-  console.log('usuario editado');
     res.render('usuario/coordinador/usuarios.hbs',{id:idingreso})
 });
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 
 app.get('/aspirante/home', function (req, res) {
-	console.log('home aspirante');
 		res.render('usuario/aspirante/home.hbs',{
 			id:idingreso
 		});
 });
 
 app.get('/aspirante/cursos', function (req, res) {
-	console.log('cursos aspirante');
   	res.render('usuario/aspirante/cursos.hbs',{id:idingreso})
 });
 
 app.get('/aspirante/inscripcion', function (req, res) {
 	idCurso = parseInt(req.query.idCurso);
 	funciones.agregarCurso(idCurso, idingreso);
-	console.log('inscripcion aspirante');
   	res.render('usuario/aspirante/inscripcion.hbs',{id:idingreso})
 });
 
 app.get('/aspirante/eliminarCurso', function (req, res) {
   idCurso = parseInt(req.query.idCurso);
   funciones.eliminarCursoDeAspirante(idingreso, idCurso);
-  console.log('eliminar curso');
     res.render('usuario/aspirante/home.hbs',{id:idingreso})
 });
 
@@ -149,28 +132,24 @@ app.get('/aspirante/eliminarCurso', function (req, res) {
 /////////////////////////////////////////////////////////////////////////////////////////
 
 app.get('/docente/home', function (req, res) {
-  console.log('home docente');
     res.render('usuario/docente/home.hbs',{
       id:idingreso
     });
 });
 
 app.get('/docente/cursos', function (req, res) {
-  console.log('cursos docente');
     res.render('usuario/docente/cursos.hbs',{id:idingreso})
 });
 
 app.get('/docente/inscripcion', function (req, res) {
   idCurso = parseInt(req.query.idCurso);
   funciones.agregarCurso(idCurso, idingreso);
-  console.log('inscripcion docente');
     res.render('usuario/docente/inscripcion.hbs',{id:idingreso})
 });
 
 app.get('/docente/eliminarCurso', function (req, res) {
   idCurso = parseInt(req.query.idCurso);
   funciones.eliminarCursoDeAspirante(idingreso, idCurso);
-  console.log('eliminar curso');
     res.render('usuario/docente/home.hbs',{id:idingreso})
 });
 
@@ -204,29 +183,24 @@ app.get('/register', function (req, res) {
 });
 
 app.get('/requestLogin', function (req, res) {
-  console.log('oiga pues');
 	id = parseInt(req.query.document);
 	listaUsuarios = require('./usuarios.json');
     let usuario = listaUsuarios.find(buscar => buscar.id == id);
     if(!usuario){
-    	console.log('usuario no encontrado');
         res.render('login.hbs')    
     }else{
         // el usuario está
         switch(usuario.tipoUsuario){
             case "aspirante":
-            	console.log('ingreso aspirante');
             	idingreso = id;
             	res.render('usuario/aspirante/home.hbs',{id:idingreso})
             break;
             case "coordinador":
-            	console.log('ingreso coordinador');
             	idingreso = id;
             	res.render('usuario/coordinador/home.hbs',{id:idingreso})
             // Codigo
             break;
             case "docente":
-              console.log('ingreso docente');
               idingreso = id;
               res.render('usuario/docente/home.hbs',{id:idingreso})
             break;
