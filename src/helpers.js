@@ -158,6 +158,7 @@ hbs.registerHelper('misCursos', codigo => {
     <th scope='col'>Estado</th>\
     <th scope='col'>Modalidad</th>\
     <th scope='col'>Intensidad horaria</th>\
+    <th scope='col'> </th>\
     </thead><tbody>";
 
     listaCursos.forEach(curso => {
@@ -168,6 +169,9 @@ hbs.registerHelper('misCursos', codigo => {
         "</td><td>" + curso.estado + 
         "</td><td>" + curso.modalidad + 
         "</td><td>" + curso.intensidad+
+        "</td><td><form action='/coordinador/eliminarCurso' method='get'>" +
+        "<input type='hidden' name='idCurso' value='" + curso.idCurso +  
+        "'><button class='btn btn-outline-dark'>Eliminar inscripción</button></form>"
         "</td></tr>";
     });
 
@@ -176,12 +180,5 @@ hbs.registerHelper('misCursos', codigo => {
     return tablaT;
 })
 
-hbs.registerHelper('cerrarCurso', () =>{
-    if (idCurso == 'disponible') {
-        code = "<form action='/coordinador/cerrarCurso' method='get'>" + 
-        "<input type='hidden' name='idCurso' value='" + curso.idCurso + 
-        "'><button class='btn btn-outline-secondary'>Cerrar curso</button></form><br>";
-    }
-    return code;
-});
+
     

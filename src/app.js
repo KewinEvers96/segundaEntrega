@@ -102,6 +102,10 @@ app.get('/aspirante/inscripcion', function (req, res) {
   	res.render('usuario/aspirante/inscripcion.hbs',{id:idingreso})
 });
 
+app.get('/aspirante/eliminarCurso', function (req, res) {
+  console.log('eliminar curso');
+    res.render('usuario/aspirante/home.hbs',{id:idingreso})
+});
 
 
 
