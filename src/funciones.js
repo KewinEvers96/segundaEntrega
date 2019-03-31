@@ -30,7 +30,7 @@ const registrar = (_nombre, _id, _correo, _telefono) => {
 
 
 const guardar = (nombreArchivo,lista) => {
-    let datos = JSON.stringify(lista);
+    let datos = JSON.stringify(lista,null, " ");
     fs.writeFile(nombreArchivo, datos, (err)=>{
         if (err) throw (err);
         console.log('Archivo guardado')
@@ -267,6 +267,35 @@ const eliminarAspirante = (id_aspirante, id_curso) =>{
 
 }
 
+// =============================================
+// ACTUALIZACION ASPIRANTE DESDE UN COORDINADOR
+// =============================================
+
+const actualizarAspirante = (id_aspirante, nombreNuevo, correoNuevo, telefonoNuevo,tipo) =>{
+    listar();
+    let aspiranteActualizar = listaUsuarios.find(buscar => buscar.id == id_aspirante);
+    if(!aspiranteActualizar){
+        console.log('estudiante no encontrado');
+        return -1;
+    }
+    else {
+        // Posiblemente lleguen 
+        if(nombreNuevo != undefined){
+            aspiranteActualizar.nombre = nombreNuevo;
+        }
+        if(correoNuevo != undefined){
+            aspiranteActualizar.correo = correoNuevo;
+        }
+        if(telefonoNuevo != undefined){
+            aspiranteActualizar.telefono = telefonoNuevo;
+        }
+        if(tipo != undefined){
+            aspiranteActualizar.tipoUsuario = tipo;
+        }
+        guardar('./src/usuarios.json', listaUsuarios);
+        return 1;
+    }
+}
 module.exports = {
     listar, 
     registrar,
@@ -280,5 +309,6 @@ module.exports = {
     mostrarCursosAspirante,
     verificarCurso,
     eliminarCursoDeAspirante,
-    mostrarAspirantesCurso
+    mostrarAspirantesCurso,
+    actualizarAspirante
 }
