@@ -65,16 +65,14 @@ app.get('/coordinador/cursoCreado', function (req, res) {
 
 app.get('/coordinador/cerrarCurso', function (req, res) {
   idCurso = parseInt(req.query.idCurso);
-
-
-
-
+  funciones.cerrarCurso(idCurso);
   console.log('cerrar curso');
     res.render('usuario/coordinador/cerrarCurso.hbs',{id:idingreso})
 });
 
 app.get('/coordinador/inscritos', function (req, res) {
   idCurso = parseInt(req.query.idCurso);
+  
 
 
   console.log('inscritos a curso');

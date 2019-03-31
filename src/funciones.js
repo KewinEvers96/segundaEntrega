@@ -202,6 +202,7 @@ module.exports = {
     registrar,
     guardar,
     crearCurso,
+    cerrarCurso,
     leerCursos,
     mostrarCursosDisponibles,
     agregarCurso,

@@ -5,5 +5,27 @@
 		<br>
 		{{idCurso}}
 
+		<br>
+			<form action="/coordinador/cursos" method="get">
+				<button class="btn btn-dark">Volver</button>
+			</form>
+		<br>
+
+		{{{cerrarCurso}}}
+
+
+		{{#if }}
+    		<h1>{{firstName}} {{lastName}}</h1>
+  		{{else}}
+    		<h1>Unknown Author</h1>
+  		{{/if}}
+
+
+		"</td><td><form action='/coordinador/cerrarCurso' method='get'>" + 
+        "<input type='hidden' name='idCurso' value='" + curso.idCurso + 
+        "'><button class='btn btn-outline-secondary'>Cerrar curso</button></form></td></tr>";
+
+
+
 	</div>
 </body>
