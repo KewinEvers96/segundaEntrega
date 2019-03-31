@@ -86,7 +86,9 @@ app.get('/coordinador/inscritos', function (req, res) {
 
 app.get('/aspirante/home', function (req, res) {
 	console.log('home aspirante');
-  	res.render('usuario/aspirante/home.hbs',{id:idingreso})
+		res.render('usuario/aspirante/home.hbs',{
+			id:parseInt(req.query.document)	
+		})
 });
 
 app.get('/aspirante/cursos', function (req, res) {

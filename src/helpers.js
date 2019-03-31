@@ -144,3 +144,33 @@ hbs.registerHelper('listarDisponibles2', () =>{
 
     return tablaT;
 });
+
+
+hbs.registerHelper('misCursos',(idAspirante) => {
+    
+    misCursos = funciones.mostrarCursosAspirante(idAspirante);
+    tablaT = "<table border=1 class='table'><thead class='thead-dark'>\
+    <th scope='col'>Código</th>\
+    <th scope='col'>Nombre curso</th>\
+    <th scope='col'>Descripción</th>\
+    <th scope='col'>Valor</th>\
+    <th scope='col'>Estado</th>\
+    <th scope='col'>Modalidad</th>\
+    <th scope='col'>Intensidad horaria</th>\
+    </thead><tbody>";
+
+    misCursos.forEach(curso => {
+        tablaT = tablaT + "<tr><td>" +curso.idCurso 
+        +"</td><td>" + curso.nombre 
+        +"</td><td>" + curso.descripcion
+        +"</td><td>" + curso.valor 
+        +"</td><td>" + curso.estado
+        +"</td><td>" + curso.modalidad
+        +"</td><td>" + curso.intensidad
+        +"</td></tr>"
+    });
+    tablaT = tablaT + "</tbody></table>";
+
+    return tablaT;
+});
+

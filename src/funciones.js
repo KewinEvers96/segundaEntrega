@@ -187,14 +187,14 @@ const mostrarCursosAspirante = codigo => {
     codigo = parseInt(codigo);
     let aspirante = listaUsuarios.find(buscar => buscar.id == codigo); 
     if(!aspirante){
+        return -1;
+    }
+    else{
         cursos = aspirante.cursos;
         if(cursos == undefined){
             cursos= [];
         }
         return cursos;
-    }
-    else{
-        return -1;
     }
 }
 
