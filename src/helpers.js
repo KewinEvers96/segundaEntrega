@@ -180,5 +180,25 @@ hbs.registerHelper('misCursos', codigo => {
     return tablaT;
 })
 
+hbs.registerHelper('mostrarAspirantes', (idCurso) => {
+    aspirantes = funciones.mostrarAspirantesCurso(idCurso);
+    tablaT = "<table border=1 class='table'><thead class='thead-dark'>\
+    <th scope='col'>Identificación</th>\
+    <th scope='col'>Nombre</th>\
+    <th scope='col'>Correo</th>\
+    <th scope='col'>Telefono</th>\
+    </thead><tbody>";
+    aspirantes.forEach(aspirante => {
 
+        tablaT = tablaT + "<tr><td>" + aspirante.id+
+        "</td><td>" + aspirante.nombre + 
+        "</td><td>" + aspirante.correo +
+        "</td><td>" + aspirante.telefono +
+        "</td></tr>";
+    });
+
+    tablaT = tablaT + "</tbody></table>";
+
+    return tablaT;
+});
     
