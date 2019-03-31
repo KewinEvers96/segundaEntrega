@@ -222,5 +222,6 @@ module.exports = {
     mostrarCursosDisponibles,
     agregarCurso,
     buscarCurso,
-    mostrarCursosAspirante
+    mostrarCursosAspirante,
+    verificarCurso
 }
