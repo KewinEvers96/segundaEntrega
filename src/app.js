@@ -204,6 +204,7 @@ app.get('/register', function (req, res) {
 });
 
 app.get('/requestLogin', function (req, res) {
+  console.log('oiga pues');
 	id = parseInt(req.query.document);
 	listaUsuarios = require('./usuarios.json');
     let usuario = listaUsuarios.find(buscar => buscar.id == id);
