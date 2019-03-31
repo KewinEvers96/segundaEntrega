@@ -76,8 +76,8 @@ app.get('/coordinador/verCurso', function (req, res) {
   console.log('ver curso disponible');
   res.render('usuario/coordinador/verCursoDisponible.hbs',{id:idingreso, idCurso:idCurso})
 
-  console.log('ver curso cerrado');
-  res.render('usuario/coordinador/verCursoCerrado.hbs',{id:idingreso, idCurso:idCurso})
+  //console.log('ver curso cerrado');
+  //res.render('usuario/coordinador/verCursoCerrado.hbs',{id:idingreso, idCurso:idCurso})
 });
 
 ////////////////////////////////////////////////////////////////////////////////////////////
