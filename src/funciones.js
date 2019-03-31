@@ -65,12 +65,28 @@ const leerCursos = () => {
     }
 }
 // CERRAR CURSO 
-const cerrarCurso= idCurso => {
+const cerrarCurso= id_curso => {
     leerCursos();
-    let cursoEncontrado = listaCursos.find(buscar => buscar.idCurso = idCurso);
+    let cursoEncontrado = listaCursos.find(buscar => buscar.idCurso == id_curso);
     cursoEncontrado.estado = "cerrado";
+    guardar('./src/cursos.json', listaCursos);
 }
+// LISTAR ASPIRANTES A UN CURSO 
 
+const mostrarAspirantesCurso = idCurso => {
+    leerCursos();
+    let curso = listaCursos.find(buscar => buscar.idCurso==idCurso);
+    if(!curso){
+        return -1;
+    }
+    else{
+        aspirantesDelCurso = curso.aspirantes;
+        if(aspirantesDelCurso == undefined){
+            aspirantesDelCurso = [];
+        }
+        return aspirantesDelCurso;
+    }
+}
 
 // VERIFICAR UN CURSO
 
@@ -242,5 +258,6 @@ module.exports = {
     buscarCurso,
     mostrarCursosAspirante,
     verificarCurso,
-    eliminarCursoDeAspirante
+    eliminarCursoDeAspirante,
+    mostrarAspirantesCurso
 }
