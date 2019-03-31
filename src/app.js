@@ -81,6 +81,11 @@ app.get('/coordinador/verCurso', function (req, res) {
   }
 });
 
+app.get('/coordinador/usuarios', function (req, res) {
+  console.log('ver usuarios');
+    res.render('usuario/coordinador/usuarios.hbs',{id:idingreso})
+});
+
 ////////////////////////////////////////////////////////////////////////////////////////////
 
 app.get('/aspirante/home', function (req, res) {
