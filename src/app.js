@@ -106,6 +106,20 @@ app.get('/coordinador/editarUsuario', function (req, res) {
     res.render('usuario/coordinador/editarUsuario.hbs',{id:idingreso, idUsuario:idUsuario})
 });
 
+app.get('/coordinador/usuarioEditado', function (req, res) {
+  idUsuario = parseInt(req.query.document);
+  name = req.query.name;
+  email = req.query.email;
+  phoneNumber = parseInt(req.query.phoneNumber);
+  tipoUsuario = req.query.tipoUsuario;
+
+  
+
+
+  console.log('usuario editado');
+    res.render('usuario/coordinador/usuarios.hbs',{id:idingreso})
+});
+
 ////////////////////////////////////////////////////////////////////////////////////////////
 
 app.get('/aspirante/home', function (req, res) {

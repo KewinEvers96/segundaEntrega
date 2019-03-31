@@ -187,6 +187,7 @@ hbs.registerHelper('mostrarAspirantes', (idCurso) => {
     <th scope='col'>Nombre</th>\
     <th scope='col'>Correo</th>\
     <th scope='col'>Telefono</th>\
+    <th scope='col'>Tipo de usuario</th>\
     <th scope='col'>  </th>\
     </thead><tbody>";
     aspirantes.forEach(aspirante => {
@@ -195,6 +196,7 @@ hbs.registerHelper('mostrarAspirantes', (idCurso) => {
         "</td><td>" + aspirante.nombre + 
         "</td><td>" + aspirante.correo +
         "</td><td>" + aspirante.telefono +
+        "</td><td>" + aspirante.tipoUsuario +
         "</td><td><form action='/coordinador/eliminarDelCurso' method='get'>" +
         "<input type='hidden' name='idAspirante' value='" + aspirante.id +
         "'><input type='hidden' name='idCurso' value='" + idCurso +  

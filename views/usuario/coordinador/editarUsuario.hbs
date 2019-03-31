@@ -1,1 +1,41 @@
-holi
+{{>headerCoordinador}}
+
+<body>
+	<div class="container">
+		<br>
+		<h3>Editar usuario</h3>
+		<br>
+		<div class="container-fluid">
+			<form action="/coordinador/usuarios" method="get">
+				<button class="btn btn-dark">Volver</button>	
+			</form>
+				<br>
+				<form action="/coordinador/usuarioEditado" method="get">
+		  		<div class="form-group">
+		   	 		<input type="hidden" class="form-control" name="document" value="{{idUsuario}}" required>
+		  		</div>
+		  		<div class="form-group">
+		    		<label for="name">Nombre</label>
+		    		<input type="text" class="form-control" name="name" placeholder="Ingrese el nuevo nombre" required>
+		  		</div>
+		  		<div class="form-group">
+		    		<label for="email">Correo electrónico</label>
+		    		<input type="email" class="form-control" name="email" placeholder="ejemplo@mimail.com" required>
+		  		</div>
+		  		<div class="form-group">
+		  			<label for="phoneNumber">Teléfono</label>
+		    		<input type="number" class="form-control" name="phoneNumber" placeholder="Ingrese el nuevo número de teléfono" required>
+		  		</div>
+		  		<div class="form-group">
+		  			<label for="phoneNumber">Tipo de usuario</label>
+		  			<select name="tipoUsuario" class="form-control" required>
+	  					<option name="aspirante">Aspirante</option>
+	  					<option name="docente">Docente</option>
+					</select>
+		  		</div>
+		  		<button type="submit" class="btn btn-primary">Guardar</button>
+			</form>	
+			<br><br><br>
+		</div>
+	</div>
+</body>
