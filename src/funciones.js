@@ -64,7 +64,16 @@ const leerCursos = () => {
         listaCursos = [];
     }
 }
-// CERRAR CURSO 
+// ========================================
+// CERRAR CURSO PARA CADA ESTUDIANTE 
+// ========================================
+
+const recorrerCursosActualizar = idCurso =>{
+    listar();
+    
+}
+
+// CERRAR CURSO SOLO EN CURSO 
 const cerrarCurso= id_curso => {
     leerCursos();
     let cursoEncontrado = listaCursos.find(buscar => buscar.idCurso == id_curso);
