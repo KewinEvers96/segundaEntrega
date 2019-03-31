@@ -184,6 +184,7 @@ const agregarCurso = (id_curso,id_aspirante) => {
 
 const mostrarCursosAspirante = codigo => {
     listar();
+    codigo = parseInt(codigo);
     let aspirante = listaUsuarios.find(buscar => buscar.id == codigo); 
     if(!aspirante){
         cursos = aspirante.cursos;
@@ -206,5 +207,6 @@ module.exports = {
     mostrarCursosDisponibles,
     agregarCurso,
     buscarCurso,
-    mostrarCursosAspirante
+    mostrarCursosAspirante,
+    cerrarCurso
 }
