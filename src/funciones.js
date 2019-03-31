@@ -184,7 +184,8 @@ const agregarCurso = (id_curso,id_aspirante) => {
             id:aspiranteEncontrado.id,
             nombre:aspiranteEncontrado.nombre,
             correo:aspiranteEncontrado.correo,
-            telefono:aspiranteEncontrado.telefono
+            telefono:aspiranteEncontrado.telefono,
+            tipoUsuario:aspiranteEncontrado.tipoUsuario
         }
         agregarAspirante(nuevoAspirante, id_curso);
         // Objeto cursos que no incluya el campo de aspirantes y el campo de tipo
