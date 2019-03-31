@@ -58,12 +58,29 @@ app.get('/coordinador/cursoCreado', function (req, res) {
 	valor = parseInt(req.query.valor);
 	modalidad = req.query.modalidad;
 	intensidad = req.query.intensidad;
-
 	funciones.crearCurso(id, nombre, descripcion, valor, modalidad, intensidad);
-
 	console.log('curso creado');
   	res.render('usuario/coordinador/cursos.hbs',{id:idingreso})
 });
+
+app.get('/coordinador/cerrarCurso', function (req, res) {
+  idCurso = parseInt(req.query.idCurso);
+
+
+
+
+  console.log('cerrar curso');
+    res.render('usuario/coordinador/cerrarCurso.hbs',{id:idingreso})
+});
+
+app.get('/coordinador/inscritos', function (req, res) {
+  idCurso = parseInt(req.query.idCurso);
+
+
+  console.log('inscritos a curso');
+    res.render('usuario/coordinador/inscritos.hbs',{id:idingreso, idCurso:idCurso})
+});
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 

@@ -37,6 +37,8 @@ hbs.registerHelper('listarDisponibles', () =>{
     </thead><tbody>";
 
     cursosDisponibles.forEach(curso => {
+
+
        tablaT = tablaT +  "<tr><td>" + curso.idCurso +
         "</td><td>" + curso.nombre + 
         "</td><td>" + curso.descripcion + 
@@ -98,7 +100,7 @@ hbs.registerHelper('listarOferta', () =>{
         "</td><td><form action='/descripcion' method='get'>" + 
         "<input type='hidden' name='idCurso' value='" + curso.idCurso + 
         "'><button class='btn btn-outline-dark'>" + curso.nombre + "</button></form>" +
-        "</a></td><td>" + curso.descripcion + 
+        "</td><td>" + curso.descripcion + 
         "</td><td>" + curso.valor +  
         "</td></tr>";
     });
@@ -108,3 +110,37 @@ hbs.registerHelper('listarOferta', () =>{
     return tablaT;
 });
 
+hbs.registerHelper('listarDisponibles2', () =>{
+    cursosDisponibles = funciones.mostrarCursosDisponibles();
+    tablaT = "<table border=1 class='table'><thead class='thead-dark'>\
+    <th scope='col'>Código</th>\
+    <th scope='col'>Nombre curso</th>\
+    <th scope='col'>Descripción</th>\
+    <th scope='col'>Valor</th>\
+    <th scope='col'>Estado</th>\
+    <th scope='col'>Modalidad</th>\
+    <th scope='col'>Intensidad horaria</th>\
+    <th scope='col'> </th>\
+    </thead><tbody>";
+
+    cursosDisponibles.forEach(curso => {
+        
+
+       tablaT = tablaT +  "<tr><td>" + curso.idCurso +
+        "</td><td><form action='/coordinador/inscritos' method='get'>" +
+        "<input type='hidden' name='idCurso' value='" + curso.idCurso + 
+        "'><button class='btn btn-outline-dark'>" + curso.nombre + "</button></form>" +
+        "</td><td>" + curso.descripcion + 
+        "</td><td>" + curso.valor + 
+        "</td><td>" + curso.estado + 
+        "</td><td>" + curso.modalidad + 
+        "</td><td>" + curso.intensidad+
+        "</td><td><form action='/coordinador/cerrarCurso' method='get'>" + 
+        "<input type='hidden' name='idCurso' value='" + curso.idCurso + 
+        "'><button class='btn btn-outline-secondary'>Cerrar curso</button></form></td></tr>";
+    });
+
+    tablaT = tablaT + "</tbody><table>";
+
+    return tablaT;
+});
