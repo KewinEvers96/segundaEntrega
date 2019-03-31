@@ -95,6 +95,22 @@ const mostrarCursosDisponibles = () =>
     let listaCursoDisponibles = listaCursos.filter(cur => cur.estado == "disponible");
     return listaCursoDisponibles;
 }
+// Agregar aspirante a las lista aspirantes en un cursos
+// tiene que ser el documento del aspirante
+const agregarAspirante= (aspirante, codigoCurso) => {
+    leerCursos();
+    let curso = listaCursos.find(buscar => buscar.idCurso == codigoCurso);
+    
+    aspirantesDelCurso = curso.aspirantes;
+
+    if(aspirantesDelCurso == undefined){
+        aspirantesDelCurso = [];
+    }
+    aspirantesDelCurso.push(aspirante);
+    curso.aspirantes = aspirantesDelCurso;
+    guardar('./src/cursos.json', listaCursos);
+}
+
 
 // ===================================================
 // Funciones para actualización de datos de aspirantes
@@ -126,9 +142,27 @@ const agregarCurso = (id_curso,id_aspirante) => {
     }
 
     let duplicado = cursosAspirante.find(buscar => buscar.idCurso ==id_curso);
-
+    // duplicado curso
     if(!duplicado){
-        cursosAspirante.push(curso);
+        // Objeto aspirante que no incluya el campo cursos y el campo tipo
+        nuevoAspirante = {
+            id:aspiranteEncontrado.id,
+            nombre:aspiranteEncontrado.nombre,
+            correo:aspiranteEncontrado.correo,
+            telefono:aspiranteEncontrado.telefono
+        }
+        agregarAspirante(nuevoAspirante, id_curso);
+        // Objeto cursos que no incluya el campo de aspirantes y el campo de tipo
+        nuevoCurso = {
+            idCurso:curso.idCurso,
+            nombre:curso.nombre, 
+            descripcion:curso.descripcion,
+            valor:curso.valor,
+            modalidad:curso.modalidad,
+            intensidad:curso.intensidad,
+            estado:curso.estado
+        }   
+        cursosAspirante.push(nuevoCurso);
         aspiranteEncontrado.cursos = cursosAspirante;
         guardar('./src/usuarios.json',listaUsuarios);
         return 1;

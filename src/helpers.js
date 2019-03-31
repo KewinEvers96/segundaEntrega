@@ -108,3 +108,21 @@ hbs.registerHelper('listarOferta', () =>{
     return tablaT;
 });
 
+// para mostrar cursos del aspirantes
+
+hbs.registerHelper('mostrarCursos', (codigo) => {
+    cursosAspirante = funciones.mostrarCursosAspirante(codigo);
+    tablaT = "<table border=1 class='table'><thead class='thead-dark'>\
+    <th scope='col'>Nombre curso</th>\
+    <th scope='col'>Descripción</th>\
+    <th scope='col'>Valor</th>\
+    <th scope='col'>Modalidad</th>\
+    <th scope='col'>Intensidad</th>\
+    </thead><tbody>";
+
+    cursosAspirante.forEach(curso => {
+        tablaT= tablaT + "<tr>" ;
+        
+    });
+});
+
