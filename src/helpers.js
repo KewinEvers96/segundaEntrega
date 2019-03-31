@@ -169,7 +169,7 @@ hbs.registerHelper('misCursos', codigo => {
         "</td><td>" + curso.estado + 
         "</td><td>" + curso.modalidad + 
         "</td><td>" + curso.intensidad+
-        "</td><td><form action='/coordinador/eliminarCurso' method='get'>" +
+        "</td><td><form action='/aspirante/eliminarCurso' method='get'>" +
         "<input type='hidden' name='idCurso' value='" + curso.idCurso +  
         "'><button class='btn btn-outline-dark'>Eliminar inscripción</button></form>"
         "</td></tr>";

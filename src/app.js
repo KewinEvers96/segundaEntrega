@@ -81,6 +81,11 @@ app.get('/coordinador/verCurso', function (req, res) {
   }
 });
 
+app.get('/coordinador/usuarios', function (req, res) {
+  console.log('ver usuarios');
+    res.render('usuario/coordinador/usuarios.hbs',{id:idingreso})
+});
+
 ////////////////////////////////////////////////////////////////////////////////////////////
 
 app.get('/aspirante/home', function (req, res) {
@@ -103,6 +108,8 @@ app.get('/aspirante/inscripcion', function (req, res) {
 });
 
 app.get('/aspirante/eliminarCurso', function (req, res) {
+  idCurso = parseInt(req.query.idCurso);
+  funciones.eliminarCursoDeAspirante(idingreso, idCurso);
   console.log('eliminar curso');
     res.render('usuario/aspirante/home.hbs',{id:idingreso})
 });
