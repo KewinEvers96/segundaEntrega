@@ -241,10 +241,31 @@ const eliminarCursoDeAspirante = (id_aspirante, id_curso) => {
         // POr lo que el aspirante si tienee cursos
         let cursosSobrantes = cursosAspirante.filter(buscar => buscar.idCurso != id_curso);
         aspirante.cursos = cursosSobrantes;
+        eliminarAspirante(id_aspirante, id_curso);
         guardar('./src/usuarios.json', listaUsuarios);
     }
 }
+// =====================================
+// ELIMINAR ASPIRANTE DEL CURSO
+// =====================================
 
+const eliminarAspirante = (id_aspirante, id_curso) =>{
+    leerCursos();
+    let curso = listaCursos.find(buscar => buscar.idCurso == id_curso);
+
+    if(!curso){
+        console.log('Curso no encontrado');
+    }
+    else{
+        aspirantes = curso.aspirantes;
+
+        let sobrantes = aspirantes.filter(filtro => filtro.id != id_aspirante);
+
+        curso.aspirantes = sobrantes;
+        guardar('./src/cursos.json',listaCursos);
+    }
+
+}
 
 module.exports = {
     listar, 
