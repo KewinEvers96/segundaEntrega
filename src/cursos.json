@@ -18,9 +18,10 @@
       "aspirantes": [
          {
             "id": 99999,
-            "nombre": "lola",
+            "nombre": "lela",
             "correo": "lola@lelo.com",
-            "telefono": 11111
+            "telefono": 8484848484,
+            "tipoUsuario": "aspirante"
          }
       ]
    },
@@ -34,16 +35,17 @@
       "estado": "cerrado",
       "aspirantes": [
          {
-            "id": 99999,
-            "nombre": "lola",
-            "correo": "lola@lelo.com",
-            "telefono": 11111
-         },
-         {
             "id": 11111,
             "nombre": "carlos",
             "correo": "ardila@unal.edu.co",
             "telefono": 32164422,
+            "tipoUsuario": "aspirante"
+         },
+         {
+            "id": 99999,
+            "nombre": "lela",
+            "correo": "lola@lelo.com",
+            "telefono": 8484848484,
             "tipoUsuario": "aspirante"
          }
       ]

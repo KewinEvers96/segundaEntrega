@@ -8,10 +8,10 @@
    },
    {
       "id": 99999,
-      "nombre": "lolita",
+      "nombre": "lela",
       "correo": "lola@lelo.com",
-      "telefono": 777777777,
-      "tipoUsuario": "docente",
+      "telefono": 8484848484,
+      "tipoUsuario": "aspirante",
       "cursos": [
          {
             "idCurso": 239292,
