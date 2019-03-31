@@ -267,6 +267,22 @@ const eliminarAspirante = (id_aspirante, id_curso) =>{
     }
 
 }
+// ============================================
+// ACTUALIZCION CURSO:
+// Solo un estudiante
+// ============================================
+
+const actualizarCurso =  aspirante => {
+    leerCursos();
+    let cursosConElAspirante = listaCursos.filter(filtro => filtro.aspirantes.id == aspirante.id);
+    cursosConElAspirante.forEach(curso => {
+        aspirantes = curso.aspirantes;
+        asp = aspirantes.find(buscar => buscar.id == aspirante.id);
+        asp = aspirante;
+    });
+
+    guardar('./src/cursos.json', listaCursos);
+}
 
 // =============================================
 // ACTUALIZACION ASPIRANTE DESDE UN COORDINADOR
@@ -294,6 +310,7 @@ const actualizarAspirante = (id_aspirante, nombreNuevo, correoNuevo, telefonoNue
             aspiranteActualizar.tipoUsuario = tipo;
         }
         guardar('./src/usuarios.json', listaUsuarios);
+        actualizarCurso(aspiranteActualizar);
         return 1;
     }
 }
