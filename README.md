@@ -15,6 +15,7 @@ INTEGRANTES
 
 	Kewin Evers Yagarí
 	Juan Fernando Misas Marín
+	Joan Felipe Beltrán
 
 
 	Gracias!
