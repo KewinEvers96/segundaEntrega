@@ -10,8 +10,8 @@
   "id": 99999,
   "nombre": "lolita",
   "correo": "lola@lelo.com",
-  "telefono": 41111111,
-  "tipoUsuario": "Docente",
+  "telefono": 777777777,
+  "tipoUsuario": "docente",
   "cursos": [
    {
     "idCurso": 239292,
@@ -20,13 +20,6 @@
     "valor": 300000,
     "modalidad": "virtual",
     "intensidad": "12 horas por semana",
-    "estado": "disponible"
-   },
-   {
-    "idCurso": 1001,
-    "nombre": "Curso básico node",
-    "descripcion": "Curso básico node",
-    "valor": 300000,
     "estado": "disponible"
    },
    {
@@ -57,12 +50,22 @@
     "estado": "disponible"
    },
    {
-    "idCurso": 1001,
-    "nombre": "Curso básico node",
-    "descripcion": "Curso básico node",
-    "valor": 300000,
+    "idCurso": 82832831,
+    "nombre": "Sistemas Numéricos",
+    "descripcion": "Cursos de sistemas numéricos.",
+    "valor": 232144232,
+    "modalidad": "Presencial",
+    "intensidad": "32 horas por mes",
     "estado": "disponible"
    }
   ]
+ },
+ {
+  "id": 2002,
+  "nombre": "harold",
+  "correo": "harolito@meme.com",
+  "telefono": 77123123,
+  "tipoUsuario": "aspirante",
+  "cursos": []
  }
 ]
