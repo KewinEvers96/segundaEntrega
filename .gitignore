@@ -1,3 +1,5 @@
 /node_modules
 /src/test.js
 /src/yargs.js
+src/cursos.json
+src/usuarios.json

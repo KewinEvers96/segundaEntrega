@@ -5,5 +5,77 @@
       "correo": "albertoCar@hotmail",
       "telefono": 41320402,
       "tipoUsuario": "coordinador"
+   },
+   {
+      "id": 99999,
+      "nombre": "lola",
+      "correo": "lola@lelo.com",
+      "telefono": 39290392,
+      "tipoUsuario": "aspirante",
+      "cursos": [
+         {
+            "idCurso": 10220,
+            "nombre": "Inteligencia artificial",
+            "descripcion": "se fue guzman",
+            "valor": 203000,
+            "modalidad": "virtual",
+            "intensidad": "5 horas semanales",
+            "estado": "disponible"
+         },
+         {
+            "idCurso": 10022,
+            "nombre": "Filosofia aplicada",
+            "descripcion": "el agua moja ? ",
+            "valor": 200000,
+            "modalidad": "presencial",
+            "intensidad": "todo es relativo",
+            "estado": "disponible"
+         },
+         {
+            "idCurso": 9323,
+            "nombre": "Fundamentos de Pendejadas",
+            "descripcion": "descripcion pendeja",
+            "valor": 200000,
+            "modalidad": "presencial",
+            "intensidad": "la que usted quiera",
+            "estado": "cerrado"
+         }
+      ]
+   },
+   {
+      "id": 11111,
+      "nombre": "harold",
+      "correo": "harolito@meme.com",
+      "telefono": 667676876,
+      "tipoUsuario": "docente",
+      "cursos": [
+         {
+            "idCurso": 10220,
+            "nombre": "Inteligencia artificial",
+            "descripcion": "se fue guzman",
+            "valor": 203000,
+            "modalidad": "virtual",
+            "intensidad": "5 horas semanales",
+            "estado": "disponible"
+         },
+         {
+            "idCurso": 11002,
+            "nombre": "Estadistica para dummies",
+            "descripcion": "descripcion estadistica",
+            "valor": 300000,
+            "modalidad": "presencial",
+            "intensidad": "4 horas semanales",
+            "estado": "disponible"
+         },
+         {
+            "idCurso": 9323,
+            "nombre": "Fundamentos de Pendejadas",
+            "descripcion": "descripcion pendeja",
+            "valor": 200000,
+            "modalidad": "presencial",
+            "intensidad": "la que usted quiera",
+            "estado": "cerrado"
+         }
+      ]
    }
 ]
