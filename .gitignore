@@ -4,3 +4,14 @@
 src/cursos.json
 src/usuarios.json
 /mongodb-data
+*.wt
+*.2019-04-10T21-19-58Z-00000
+*.2019-04-13T22-54-20Z-00000
+*.0000000002
+*.0000000001
+src/WiredTiger
+src/WiredTiger.lock
+src/WiredTiger.turtle
+src/mongod.lock
+src/storage.bson
+src/diagnostic.data/metrics.interim
