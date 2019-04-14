@@ -5,7 +5,7 @@ const hbs = require('hbs');
 const funciones = require('./funciones');
 const mongoose = require('mongoose');
 const Usuario = require('./models/usuario')
-
+const Curso = require('./models/curso')
 
 
 //const directioriopublico = path.join(__dirname, '../public/img');
@@ -46,31 +46,61 @@ app.get('/coordinador/home', function (req, res) {
   	res.render('usuario/coordinador/home.hbs',{id:idingreso})
 });
 
+// PARA LISTAR CURSOS 
 app.get('/coordinador/cursos', function (req, res) {
-  	res.render('usuario/coordinador/cursos.hbs',{id:idingreso})
+    Curso.find({}, (err, resultado) =>{
+      if (err){
+        return console.log(err);
+      }
+      res.render('usuario/coordinador/cursos.hbs',{
+        id:idingreso, 
+        listado:resultado
+      });
+    })
+    
 });
 
 app.get('/coordinador/crearCurso', function (req, res) {
   	res.render('usuario/coordinador/crearCurso.hbs',{id:idingreso})
 });
 
+// CREAR CURSO
 app.get('/coordinador/cursoCreado', function (req, res) {
-	id = parseInt(req.query.id);
-	nombre = req.query.nombre;
-	descripcion = req.query.descripcion;
-	valor = parseInt(req.query.valor);
-	modalidad = req.query.modalidad;
-	intensidad = req.query.intensidad;
-	funciones.crearCurso(id, nombre, descripcion, valor, modalidad, intensidad);
-  	res.render('usuario/coordinador/cursos.hbs',{id:idingreso})
+  let curso = new Curso({
+    idCurso: parseInt(req.query.id),
+    nombre: req.query.nombre,
+    descripcion: req.query.descripcion,
+    valor: parseInt(req.query.valor),
+    estado:'disponible',
+    modalidad :req.query.modalidad,
+    intensidad : req.query.intensidad
+  }); 
+  curso.save((err, resultado) =>{
+    if(err){
+      return console.log(err);
+    }
+    
+    res.render('usuario/coordinador/cursos.hbs',{id:idingreso})
+  }); 
+
+	// id = parseInt(req.query.id);
+	// nombre = req.query.nombre;
+	// descripcion = req.query.descripcion;
+	// valor = parseInt(req.query.valor);
+	// modalidad = req.query.modalidad;
+	// intensidad = req.query.intensidad;
+	// funciones.crearCurso(id, nombre, descripcion, valor, modalidad, intensidad);
+  // 	res.render('usuario/coordinador/cursos.hbs',{id:idingreso})
 });
 
+// CERRAR CURSO 
 app.get('/coordinador/cerrarCurso', function (req, res) {
   idCurso = parseInt(req.query.idCurso);
   funciones.cerrarCurso(idCurso);
     res.render('usuario/coordinador/cerrarCurso.hbs',{id:idingreso})
 });
 
+// VER CURSO 
 app.get('/coordinador/verCurso', function (req, res) {
   idCurso = parseInt(req.query.idCurso);
   if (funciones.verificarCurso(idCurso)) {
@@ -80,6 +110,7 @@ app.get('/coordinador/verCurso', function (req, res) {
   }
 });
 
+// ELIMINAR CURSO 
 app.get('/coordinador/eliminarDelCurso', function (req, res) {
   idCurso = parseInt(req.query.idCurso);
   idAspirante = parseInt(req.query.idAspirante);
@@ -196,6 +227,8 @@ app.get('/register', function (req, res) {
   res.render('usuario/registrar.hbs')
 });
 
+
+// PARA LOGUEARSE 
 app.get('/requestLogin', function (req, res) {
 
     Usuario.findOne({id:req.query.document}, (err, resultado) => {

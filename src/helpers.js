@@ -2,6 +2,7 @@ const hbs = require('hbs');
 const funciones = require('./funciones');
 const appp = require('./app');
 
+
 hbs.registerHelper('verificar', (id)=>{
     listaUsuarios = require('./cursos.json');
     let usuario = listaUsuarios.find(buscar => buscar.id == id);
@@ -115,9 +116,8 @@ hbs.registerHelper('listarDisponibles2', () =>{
     return tablaT;
 });
 
-
-hbs.registerHelper('listarCursos', () =>{
-    listaCursos = require('./cursos.json');
+// LISTAR CURSOS 
+hbs.registerHelper('listarCursos', (listado) =>{
     tablaT = "<table border=1 class='table table-hover'><thead class='thead-dark'>\
     <th scope='col'>Código</th>\
     <th scope='col'>Nombre curso</th>\
@@ -127,8 +127,7 @@ hbs.registerHelper('listarCursos', () =>{
     <th scope='col'>Modalidad</th>\
     <th scope='col'>Intensidad horaria</th>\
     </thead><tbody>";
-
-    listaCursos.forEach(curso => {
+    listado.forEach(curso => {
        tablaT = tablaT +  "<tr><td>" + curso.idCurso + 
         "</td><td><form action='/coordinador/verCurso' method='get'>" +
         "<input type='hidden' name='idCurso' value='" + curso.idCurso + 
