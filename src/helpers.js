@@ -118,6 +118,7 @@ hbs.registerHelper('listarDisponibles2', () =>{
 
 // LISTAR CURSOS 
 hbs.registerHelper('listarCursos', (listado) =>{
+
     tablaT = "<table border=1 class='table table-hover'><thead class='thead-dark'>\
     <th scope='col'>Código</th>\
     <th scope='col'>Nombre curso</th>\
@@ -147,8 +148,7 @@ hbs.registerHelper('listarCursos', (listado) =>{
 
 
 
-hbs.registerHelper('misCursos', codigo => {
-    listaCursos = funciones.mostrarCursosAspirante(codigo);
+hbs.registerHelper('misCursos', listaCursos => {
     tablaT = "<table border=1 class='table table-hover'><thead class='thead-dark'>\
     <th scope='col'>Código</th>\
     <th scope='col'>Nombre curso</th>\

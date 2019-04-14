@@ -2,26 +2,25 @@ const fs = require('fs');
 const Curso = require('./models/curso');
 const Usuario = require('./models/usuario');
 
-const listar = () => {
+const listar = (f) => {
     // try{// Por si existe el archivo
     //     listaUsuarios = require('./usuarios.json');
     // }
     // catch(error){ // Si el archivo no existe
     //     listaUsuarios = [];
     // }
-
     Usuario.find({}, (err, resultado) => {
         if(err){
             return console.log(err);
         }
         if(!resultado){
-            listaUsuarios = [];
+            getListaUsuarios([]);
         }
         else{
-            listaUsuarios = resultado;
+            console.log(resultado);
+            getListaUsuarios(resultado);
         }
-        }
-    );
+    });
 };
 
 const registrar = (_nombre, _id, _correo, _telefono) => {
@@ -78,6 +77,7 @@ const leerCursos = () => {
     // catch(error){// Si el archivo no existe
     //     listaCursos = [];
     // }
+    listaCursos = [];
     Curso.find({}, (err, resultado)=>{
         if(err){
             console.log(err);
@@ -292,7 +292,8 @@ const agregarCurso = (id_curso,id_aspirante) => {
 // Mostrar cursos del aspirante
 
 const mostrarCursosAspirante = codigo => {
-    listar();
+    
+    console.log(listaUsuarios);
     let aspirante = listaUsuarios.find(buscar => buscar.id == codigo); 
     if(!aspirante){
         return -1;
@@ -463,6 +464,9 @@ const actualizarAspirante = (id_aspirante, nombreNuevo, correoNuevo, telefonoNue
         return 1;
     }
 }
+
+/// Es imposible hay que cambiar todo 
+// Todo lo que retorne algo hay que modificarlo
 module.exports = {
     listar, // Checked
     guardar,

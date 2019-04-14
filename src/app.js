@@ -252,7 +252,13 @@ app.get('/requestLogin', function (req, res) {
       switch(resultado.tipoUsuario){
           case "aspirante":
             idingreso = resultado.id;
-            res.render('usuario/aspirante/home.hbs',{id:idingreso})
+            Usuario.findOne({id:idingreso}, (err, resultado) => {
+              if(err){
+                return console.log(err);
+              }
+              res.render('usuario/aspirante/home.hbs',{id:idingreso, listaCursos:resultado.cursos})
+            });
+            
           break;
           case "coordinador":
             idingreso = resultado.id;
@@ -261,7 +267,12 @@ app.get('/requestLogin', function (req, res) {
           break;
           case "docente":
             idingreso = resultado.id;
-            res.render('usuario/docente/home.hbs',{id:idingreso})
+            Usuario.findOne({id:idingreso}, (err, resultado) => {
+              if(err){
+                return console.log(err);
+              }
+              res.render('usuario/docente/home.hbs',{id:idingreso,listaCursos:resultado.cursos});
+            });
           break;
       }
     });
