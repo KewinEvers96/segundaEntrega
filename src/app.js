@@ -203,9 +203,18 @@ app.get('/aspirante/inscripcion', function (req, res) {
 });
 
 app.get('/aspirante/eliminarCurso', function (req, res) {
-  idCurso = parseInt(req.query.idCurso);
-  funciones.eliminarCursoDeAspirante(idingreso, idCurso);
-    res.render('usuario/aspirante/home.hbs',{id:idingreso})
+  id_curso = parseInt(req.query.idCurso);
+  funciones.eliminarCursoDeAspirante(idingreso, id_curso);
+  setTimeout(function(){
+    Usuario.findOne({id:idingreso} , (err,resultado) =>{
+      if(err){
+        return console.log(err);
+      }
+      cursos = resultado.cursos;
+      res.render('usuario/aspirante/home.hbs',{id:idingreso, listaCursos:cursos});
+    });
+  },1000);
+    
 });
 
 
