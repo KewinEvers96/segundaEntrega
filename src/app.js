@@ -63,7 +63,7 @@ app.get('/coordinador/cursos', function (req, res) {
 app.get('/coordinador/crearCurso', function (req, res) {
   	res.render('usuario/coordinador/crearCurso.hbs',{id:idingreso})
 });
-
+// CHECKED
 // CREAR CURSO
 app.get('/coordinador/cursoCreado', function (req, res) {
   let curso = new Curso({
@@ -80,8 +80,13 @@ app.get('/coordinador/cursoCreado', function (req, res) {
     if(err){
       return console.log(err);
     }
+    Curso.find({}, (err, resultado2) =>{
+      if(err){
+        return console.log(err);
+      }
+      res.render('usuario/coordinador/cursos.hbs',{id:idingreso, listado:resultado2});
+    });
     
-    res.render('usuario/coordinador/cursos.hbs',{id:idingreso})
   }); 
 
 	// id = parseInt(req.query.id);
