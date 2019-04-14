@@ -1,4 +1,5 @@
 const fs = require('fs');
+const Curso = require('./models/curso')
 
 const listar = () => {
     try{// Por si existe el archivo
@@ -133,15 +134,25 @@ const mostrarAspirantesCurso = idCurso => {
 
 // VERIFICAR UN CURSO
 
-const verificarCurso = idCurso => {
-    leerCursos();
-    let cursoAVerificar = listaCursos.find(buscar => buscar.idCurso == idCurso);
-    if(cursoAVerificar.estado == "disponible"){
-        return true;
-    }
-    else{
-        return false;
-    }
+const verificarCurso = idcurso => {
+    // leerCursos();
+    // let cursoAVerificar = listaCursos.find(buscar => buscar.idCurso == idCurso);
+    Curso.findOne({idCurso:idcurso}, (err, resultado) =>{
+        if(err){
+            console.log(err);
+        }
+        if(!resultado){
+            console.log("no se encontró el curso");
+        }
+
+        if(resultado.estado == "disponible"){
+            return true;
+        }
+        else{
+            return false;
+        }
+    })
+    
 }
 // Creación de un nuevo curso
 const crearCurso = (_id, _nombre, _descripcion, _valor, _modalidad, _intensidad ) => {
@@ -390,12 +401,7 @@ const actualizarAspirante = (id_aspirante, nombreNuevo, correoNuevo, telefonoNue
     }
 }
 module.exports = {
-    listar, 
-    registrar,
-    guardar,
-    crearCurso,
     cerrarCurso,
-    leerCursos,
     mostrarCursosDisponibles,
     agregarCurso,
     buscarCurso,

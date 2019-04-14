@@ -59,7 +59,7 @@ app.get('/coordinador/cursos', function (req, res) {
     })
     
 });
-
+// Para la creacion de un curso 
 app.get('/coordinador/crearCurso', function (req, res) {
   	res.render('usuario/coordinador/crearCurso.hbs',{id:idingreso})
 });
@@ -94,10 +94,17 @@ app.get('/coordinador/cursoCreado', function (req, res) {
 });
 
 // CERRAR CURSO 
+// ACTUALIZAR ESTADO 
 app.get('/coordinador/cerrarCurso', function (req, res) {
-  idCurso = parseInt(req.query.idCurso);
-  funciones.cerrarCurso(idCurso);
+  idcurso = parseInt(req.query.idCurso);
+
+  Curso.findOneAndUpdate({idCurso : idcurso}, {$set:{estado:"cerrado"}}, {new : true, runValidators: true, context: 'query' }, (err, resultado)=> {
+    if(err){
+      return console.log(err);
+    }
     res.render('usuario/coordinador/cerrarCurso.hbs',{id:idingreso})
+  });
+  // funciones.cerrarCurso(idCurso);
 });
 
 // VER CURSO 
