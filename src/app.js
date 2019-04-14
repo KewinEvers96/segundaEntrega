@@ -3,8 +3,8 @@ const app = express();
 const path = require('path');
 const hbs = require('hbs');
 const funciones = require('./funciones');
-const fs = require('fs');
-
+const mongoose = require('mongoose');
+const Usuario = require('./models/usuario')
 
 
 
@@ -19,6 +19,12 @@ require('./helpers');
 
 
 
+mongoose.connect("mongodb://localhost:27017/baseDeDatos", (err,result) =>{
+  if(err){
+      return console.log(err);
+  }
+  console.log("conectado");
+});
 
 
 
@@ -169,13 +175,21 @@ app.get('/docente/eliminarCurso', function (req, res) {
 //////////////////////////////////////////////////////////////////////////////////
 
 app.get('/registered', function (req, res) {
-	nombre = req.query.name;
-	id = parseInt(req.query.document);
-	correo = req.query.email;	
-	telefono = parseInt(req.query.phoneNumber);
+	// nombre = req.query.name;
+	// id = parseInt(req.query.document);
+	// correo = req.query.email;	
+	// telefono = parseInt(req.query.phoneNumber);
 
-	funciones.registrar(nombre, id, correo, telefono);
-  	res.render('login.hbs')
+	// funciones.registrar(nombre, id, correo, telefono);
+  let usuario = new Usuario({
+    nombre :req.query.name,
+    id : parseInt(req.query.document),
+    correo : req.query.email,
+    telefono: parseInt(req.query.phoneNumber),
+    tipoUsuario:'aspirante'
+  });
+  usuario.save();
+  res.render('login.hbs')
 });
 
 app.get('/register', function (req, res) {
