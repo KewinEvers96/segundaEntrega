@@ -230,28 +230,32 @@ const agregarAspirante= (aspirante, codigoCurso) => {
 
 // agregarCursoAspirante
 const agregarCurso = (id_curso,id_aspirante) => {
-    listar();
-    let aspiranteEncontrado = listaUsuarios.find(buscar => buscar.id == id_aspirante);
-    let curso = buscarCurso(id_curso);
-
-    if(!aspiranteEncontrado){
-        // aspirante con ese codigo no encontrado
-        console.log('Aspirante no existe');
-        return -1;
-    }   
-    else{
-        if(curso == -1){
-            // No encontró el curso
-            console.log('Curso no existe');
+    // listar();
+    // let aspiranteEncontrado = listaUsuarios.find(buscar => buscar.id == id_aspirante);
+    // let curso = buscarCurso(id_curso);
+    Usuario.findOne({id:id_aspirante}, (err, resultado) =>{
+        if(!resultado){
+            // aspirante con ese codigo no encontrado
+            console.log('Aspirante no existe');
             return -1;
-        }
+        }   
         else{
-            cursosAspirante = aspiranteEncontrado.cursos;
-            if(cursosAspirante  == undefined){
-                cursosAspirante = [];
+            // Hay que buscar el curso 
+            if(curso == -1){
+                // No encontró el curso
+                console.log('Curso no existe');
+                return -1;
+            }
+            else{
+                cursosAspirante = aspiranteEncontrado.cursos;
+                if(cursosAspirante  == undefined){
+                    cursosAspirante = [];
+                }
             }
         }
-    }
+    });
+
+    
 
     let duplicado = cursosAspirante.find(buscar => buscar.idCurso ==id_curso);
     // duplicado curso

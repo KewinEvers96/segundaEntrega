@@ -173,6 +173,8 @@ app.get('/aspirante/home', function (req, res) {
     });
 });
 
+// Disponibles para curso
+// CHECKED
 app.get('/aspirante/cursos', function (req, res) {
     Curso.find({estado:'disponible'}, (err, resultado) =>{
       if(err){
