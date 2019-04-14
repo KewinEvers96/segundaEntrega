@@ -349,53 +349,57 @@ const mostrarCursosAspirante = codigo => {
 }
 // ELIMINAR CURSO del aspirante.
 const eliminarCursoDeAspirante = (id_aspirante, id_curso) => {
-    listar();
-    let aspirante = listaUsuarios.find(buscar => buscar.id == id_aspirante);
-    if(!aspirante){
-        // Aspirante no encontrado
-        console.log('Aspirante no encontrado');
-    }
-    else{
-        cursosAspirante = aspirante.cursos;
-        // Suponiendo que los cursos que se eliminan serán losque se están mostrando
-        // POr lo que el aspirante si tienee cursos
-        let cursosSobrantes = cursosAspirante.filter(buscar => buscar.idCurso != id_curso);
-        aspirante.cursos = cursosSobrantes;
-        // LISTO 
-        eliminarAspirante(id_aspirante, id_curso);
-        Usuario.findOneAndUpdate({id:id_aspirante}, {$set:{cursos:aspirante.cursos}}, (err, resultado) =>{
-            if(err){
-                return console.log(err);
-            }
-        });
-    }
+    Usuario.findOne({id:id_aspirante}, (err,aspirante) => {
+        if(err){
+            console.log(err);
+        }
+        if(!aspirante){
+            // Aspirante no encontrado
+            console.log('Aspirante no encontrado');
+        }
+        else{
+            cursosAspirante = aspirante.cursos;
+            // Suponiendo que los cursos que se eliminan serán losque se están mostrando
+            // POr lo que el aspirante si tienee cursos
+            let cursosSobrantes = cursosAspirante.filter(buscar => buscar.idCurso != id_curso);
+            // LISTO 
+            // Actualiza el usuario 
+            Usuario.findOneAndUpdate({id:id_aspirante}, {$set:{cursos:cursosSobrantes}}, (err, resultado) =>{
+                if(err){
+                    return console.log(err);
+                }
+            });
+            eliminarAspirante(id_aspirante, id_curso);
+            
+        }
+    });
 }
 // =====================================
 // ELIMINAR ASPIRANTE DEL CURSO
 // =====================================
 
 const eliminarAspirante = (id_aspirante, id_curso) =>{
-    leerCursos();
-    let curso = listaCursos.find(buscar => buscar.idCurso == id_curso);
-
-    if(!curso){
-        console.log('Curso no encontrado');
-    }
-    else{
-        aspirantes = curso.aspirantes;
-
-        let sobrantes = aspirantes.filter(filtro => filtro.id != id_aspirante);
-
-        curso.aspirantes = sobrantes;
-
-        Curso.findOneAndUpdate({idCurso:id_curso}, {$set:{aspirantes:curso.aspirantes}},
-            (err, resultado) => {
-                if(err){
-                    return console.log(err);
-                }
-            })
-    }
-
+    Curso.findOne({idCurso:id_curso}, (err, curso)=>{
+        if(err){
+            return console.log(err);
+        }
+        if(!curso){
+            // No encuentra el curso
+            console.log('Curso no encontrado');
+        }
+        else{
+            aspirantes = curso.aspirantes;
+    
+            let sobrantes = aspirantes.filter(filtro => filtro.id != id_aspirante);
+    
+            Curso.findOneAndUpdate({idCurso:id_curso}, {$set:{aspirantes:sobrantes}},
+                (err, resultado) => {
+                    if(err){
+                        return console.log(err);
+                    }
+                })
+        }
+    });
 }
 // =======================
 // Codigos de los cursos donde están el estudiante 

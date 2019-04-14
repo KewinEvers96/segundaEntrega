@@ -179,7 +179,7 @@ hbs.registerHelper('misCursos', listaCursos => {
 })
 
 // YA 
-hbs.registerHelper('mostrarAspirantes', (idCurso,aspirantes) => {
+hbs.registerHelper('mostrarAspirantes', (id,aspirantes,idCurso) => {
     
     tablaT = "<table border=1 class='table table-hover'><thead class='thead-dark'>\
     <th scope='col'>Identificación</th>\
