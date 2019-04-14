@@ -137,7 +137,12 @@ app.get('/coordinador/eliminarDelCurso', function (req, res) {
 });
 
 app.get('/coordinador/usuarios', function (req, res) {
-    res.render('usuario/coordinador/usuarios.hbs',{id:idingreso})
+    Usuario.find({}, (err, usuarios) =>{
+      if(err){
+        console.log(err);
+      }
+      res.render('usuario/coordinador/usuarios.hbs',{id:idingreso, listado:usuarios})
+    }); 
 });
 
 app.get('/coordinador/editarUsuario', function (req, res) {

@@ -209,8 +209,8 @@ hbs.registerHelper('mostrarAspirantes', (idCurso,aspirantes) => {
 });
 
 
-hbs.registerHelper('listarUsuarios', () =>{
-    listaUsuarios = require('./usuarios.json');
+hbs.registerHelper('listarUsuarios', (listado) =>{
+
     tablaT = "<table border=1 class='table table-hover'><thead class='thead-dark'>\
     <th scope='col'>Identificación</th>\
     <th scope='col'>Nombre</th>\
@@ -220,7 +220,7 @@ hbs.registerHelper('listarUsuarios', () =>{
     <th scope='col'> </th>\
     </thead><tbody>";
 
-    listaUsuarios.forEach(usuario => {
+    listado.forEach(usuario => {
        tablaT = tablaT +  "<tr><td>" + usuario.id + 
         "</td><td>" + usuario.nombre + 
         "</td><td>" + usuario.correo + 
