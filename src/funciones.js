@@ -91,54 +91,80 @@ const leerCursos = () => {
     })
 }
 
-// IDS DE LOS ASPIRANTES DONDE ESTAN EL CURSO
-const id_aspirantes = idCurso => {
-    aspirantes = mostrarAspirantesCurso(idCurso);
-    let ids = [];
-    aspirantes.forEach(aspirante =>{
-        ids.push(aspirante.id);
-    });
+// // IDS DE LOS ASPIRANTES DONDE ESTAN EL CURSO
+// const id_aspirantes = idCurso => {
+   // aspirantes = mostrarAspirantesCurso(idCurso);
+//     let ids = [];
+//     aspirantes.forEach(aspirante =>{
+//         ids.push(aspirante.id);
+//     });
 
-    return ids;
-}
+//     return ids;
+// }
 // ========================================
 // CERRAR CURSO PARA CADA ESTUDIANTE 
 // ========================================
 
-const recorrerCursosActualizar = (idCurso,ncurso) =>{
-    listar();
-    ids = id_aspirantes(idCurso);
-    ids.forEach(id => {
-        let aspirante = listaUsuarios.find(buscar => buscar.id == id);
-        if(!aspirante){
-            console.log('Aspirante no encontrado');
+const recorrerCursosActualizar = (idcurso) =>{
+    
+    // hay que obtener los ids de los aspirantes
+    // ids = id_aspirantes(idCurso);
+    Curso.findOne({idCurso:idcurso}, (err, ncurso) =>{
+        if(err){
+            return console.log(err);
         }
-        else{
-            cursos = aspirante.cursos;
-            let sobrantes = cursos.filter(filtro => filtro.idCurso != idCurso);
-            let nuevoCurso = {
-                idCurso:ncurso.idCurso,
-                nombre:ncurso.nombre, 
-                descripcion:ncurso.descripcion,
-                valor:ncurso.valor,
-                modalidad:ncurso.modalidad,
-                intensidad:ncurso.intensidad,
-                estado:ncurso.estado
-            };
-            sobrantes.push(nuevoCurso);
-            aspirante.cursos = sobrantes;
-        }
-    });
-    guardar('./src/usuarios.json', listaUsuarios);
+        aspirantes = ncurso.aspirantes;
+
+        let ids = [];
+
+        aspirantes.forEach(aspirante =>{
+            ids.push(aspirante.id);
+        });
+        ids.forEach(idi=> {
+            Usuario.findOne({id:idi},(err, aspirante) => {
+                if(err){
+                    return console.log(err);
+                }
+                if(!aspirante){
+                    console.log('Aspirante no encontrado');
+                }
+                else{
+                    cursosA = aspirante.cursos;
+                    let sobrantes = cursosA.filter(filtro => filtro.idCurso != idcurso);
+
+                    let nuevoCurso = {
+                        idCurso:ncurso.idCurso,
+                        nombre:ncurso.nombre, 
+                        descripcion:ncurso.descripcion,
+                        valor:ncurso.valor,
+                        modalidad:ncurso.modalidad,
+                        intensidad:ncurso.intensidad,
+                        estado:"cerrado"
+                    };
+                    console.log(sobrantes);
+                    sobrantes.push(nuevoCurso);
+                    console.log(sobrantes);
+                    Usuario.findOneAndUpdate({id:idi}, {$set:{cursos:sobrantes}}, (err, res) =>{
+                        if(err){
+                            return console.log(err);
+                        }
+                    });
+                }
+            });
+        });
+    });    
 }
 
 // CERRAR CURSO SOLO EN CURSO 
 const cerrarCurso= id_curso => {
-    leerCursos();
-    let cursoEncontrado = listaCursos.find(buscar => buscar.idCurso == id_curso);
-    cursoEncontrado.estado = "cerrado";
-    recorrerCursosActualizar(id_curso, cursoEncontrado);
-    guardar('./src/cursos.json', listaCursos);
+    Curso.findOneAndUpdate({idCurso:id_curso}, {$set:{estado:"cerrado"}}, (err, res) =>{
+        if(err){
+            console.log(err);
+        }
+    });
+    // Actualiza los aspirantes para que aparezcan en cero 
+    recorrerCursosActualizar(id_curso);
+    
 }
 // LISTAR ASPIRANTES A UN CURSO 
 
@@ -492,5 +518,6 @@ module.exports = {
     verificarCurso,// CHECKED
     eliminarCursoDeAspirante,// CHECKED
     mostrarAspirantesCurso,// CHECKED
-    actualizarAspirante// CHECKED
+    actualizarAspirante,// CHECKED
+    cerrarCurso
 }

@@ -103,14 +103,10 @@ app.get('/coordinador/cursoCreado', function (req, res) {
 // ACTUALIZAR ESTADO a cerrado
 app.get('/coordinador/cerrarCurso', function (req, res) {
   idcurso = parseInt(req.query.idCurso);
-
-  Curso.findOneAndUpdate({idCurso : idcurso}, {$set:{estado:"cerrado"}}, {new : true, runValidators: true, context: 'query' }, (err, resultado)=> {
-    if(err){
-      return console.log(err);
-    }
-    res.render('usuario/coordinador/cerrarCurso.hbs',{id:idingreso})
-  });
-  // funciones.cerrarCurso(idCurso);
+  console.log(idcurso);
+  funciones.cerrarCurso(idcurso);
+  res.render('usuario/coordinador/cerrarCurso.hbs',{id:idingreso})
+  
 });
 
 // VER CURSO 
@@ -122,9 +118,9 @@ app.get('/coordinador/verCurso', function (req, res) {
       console.log(err);
     }
     if (resultado.estado == "disponible") {
-      res.render('usuario/coordinador/verCursoDisponible.hbs',{id:idingreso, aspirantes:resultado.aspirantes})
+      res.render('usuario/coordinador/verCursoDisponible.hbs',{id:idingreso, aspirantes:resultado.aspirantes,idCurso:id_curso})
     }else{
-      res.render('usuario/coordinador/verCursoCerrado.hbs',{id:idingreso, aspirantes:resultado.aspirantes})
+      res.render('usuario/coordinador/verCursoCerrado.hbs',{id:idingreso, aspirantes:resultado.aspirantes, idCurso:id_curso})
   }})
 });
 
