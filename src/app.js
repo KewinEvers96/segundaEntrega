@@ -130,17 +130,20 @@ app.get('/coordinador/eliminarDelCurso', function (req, res) {
   
   id_aspirante = parseInt(req.query.idAspirante);
   funciones.eliminarCursoDeAspirante(id_aspirante,  id_curso);
-  Curso.findOne({idCurso:id_curso} , (err, cursoVerificar)=>{
-    console.log(cursoVerificar);
-    if(err){
-      return console.log(err);
-    }
-    if (cursoVerificar.estado == "disponible") {
-      res.render('usuario/coordinador/verCursoDisponible.hbs',{id:idingreso,aspirantes:cursoVerificar.aspirantes, idCurso:id_curso})
-    }else{
-      res.render('usuario/coordinador/verCursoCerrado.hbs',{id:idingreso,aspirantes:cursoVerificar.aspirantes, idCurso:id_curso})
-    }
-  });
+  setTimeout(function() {
+    Curso.findOne({idCurso:id_curso} , (err, cursoVerificar)=>{
+      // console.log(cursoVerificar);
+      if(err){
+        return console.log(err);
+      }
+      if (cursoVerificar.estado == "disponible") {
+        res.render('usuario/coordinador/verCursoDisponible.hbs',{id:idingreso,aspirantes:cursoVerificar.aspirantes, idCurso:id_curso})
+      }else{
+        res.render('usuario/coordinador/verCursoCerrado.hbs',{id:idingreso,aspirantes:cursoVerificar.aspirantes, idCurso:id_curso})
+      }
+    });
+  }, 1000);
+  
 });
 
 app.get('/coordinador/usuarios', function (req, res) {
