@@ -73,7 +73,8 @@ app.get('/coordinador/cursoCreado', function (req, res) {
     valor: parseInt(req.query.valor),
     estado:'disponible',
     modalidad :req.query.modalidad,
-    intensidad : req.query.intensidad
+    intensidad : req.query.intensidad,
+    aspirantes:[]
   }); 
   curso.save((err, resultado) =>{
     if(err){

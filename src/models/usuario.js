@@ -25,6 +25,9 @@ const usuarioSchema = new Schema({
         required:true,
         trim:true,
         enum:{values:['coordinador', 'aspirante', 'docente']}
+    },
+    cursos:{
+        type:Array
     }
 });
 

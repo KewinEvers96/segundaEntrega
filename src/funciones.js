@@ -1,13 +1,27 @@
 const fs = require('fs');
-const Curso = require('./models/curso')
+const Curso = require('./models/curso');
+const Usuario = require('./models/usuario');
 
 const listar = () => {
-    try{// Por si existe el archivo
-        listaUsuarios = require('./usuarios.json');
-    }
-    catch(error){ // Si el archivo no existe
-        listaUsuarios = [];
-    }
+    // try{// Por si existe el archivo
+    //     listaUsuarios = require('./usuarios.json');
+    // }
+    // catch(error){ // Si el archivo no existe
+    //     listaUsuarios = [];
+    // }
+
+    Usuario.find({}, (err, resultado) => {
+        if(err){
+            return console.log(err);
+        }
+        if(!resultado){
+            listaUsuarios = [];
+        }
+        else{
+            listaUsuarios = resultado;
+        }
+        }
+    );
 };
 
 const registrar = (_nombre, _id, _correo, _telefono) => {
@@ -58,12 +72,23 @@ const buscarCurso = (codigo) => {
 
 // Lista los cursos
 const leerCursos = () => {
-    try {
-        listaCursos = require('./cursos.json');
-    }
-    catch(error){// Si el archivo no existe
-        listaCursos = [];
-    }
+    // try {
+    //     listaCursos = require('./cursos.json');
+    // }
+    // catch(error){// Si el archivo no existe
+    //     listaCursos = [];
+    // }
+    Curso.find({}, (err, resultado)=>{
+        if(err){
+            console.log(err);
+        }
+        if(!resultado){
+            listaCursos = [];
+        }
+        else{
+            listaCursos = resultado;
+        }
+    })
 }
 
 // IDS DE LOS ASPIRANTES DONDE ESTAN EL CURSO
@@ -134,25 +159,15 @@ const mostrarAspirantesCurso = idCurso => {
 
 // VERIFICAR UN CURSO
 
-const verificarCurso = idcurso => {
-    // leerCursos();
-    // let cursoAVerificar = listaCursos.find(buscar => buscar.idCurso == idCurso);
-    Curso.findOne({idCurso:idcurso}, (err, resultado) =>{
-        if(err){
-            console.log(err);
-        }
-        if(!resultado){
-            console.log("no se encontró el curso");
-        }
-
-        if(resultado.estado == "disponible"){
-            return true;
-        }
-        else{
-            return false;
-        }
-    })
-    
+const verificarCurso = idCurso => {
+    leerCursos();
+    let cursoAVerificar = listaCursos.find(buscar => buscar.idCurso == idCurso);
+    if(cursoAVerificar.estado == "disponible"){
+        return true;
+    }
+    else{
+        return false;
+    }
 }
 // Creación de un nuevo curso
 const crearCurso = (_id, _nombre, _descripcion, _valor, _modalidad, _intensidad ) => {
@@ -197,7 +212,11 @@ const agregarAspirante= (aspirante, codigoCurso) => {
     }
     aspirantesDelCurso.push(aspirante);
     curso.aspirantes = aspirantesDelCurso;
-    guardar('./src/cursos.json', listaCursos);
+    Curso.findOneAndUpdate({idCurso:codigoCurso},{$set:{aspirantes:curso.aspirantes}}, (err, resultado) =>{
+        if(err){
+            return console.log(err);
+        }
+    });
 }
 
 
@@ -241,7 +260,8 @@ const agregarCurso = (id_curso,id_aspirante) => {
             telefono:aspiranteEncontrado.telefono,
             tipoUsuario:aspiranteEncontrado.tipoUsuario
         }
-        agregarAspirante(nuevoAspirante, id_curso);
+        // LISTO 
+        agregarAspirante(nuevoAspirante, id_curso);// LISTO 
         // Objeto cursos que no incluya el campo de aspirantes y el campo de tipo
         nuevoCurso = {
             idCurso:curso.idCurso,
@@ -254,7 +274,11 @@ const agregarCurso = (id_curso,id_aspirante) => {
         }   
         cursosAspirante.push(nuevoCurso);
         aspiranteEncontrado.cursos = cursosAspirante;
-        guardar('./src/usuarios.json',listaUsuarios);
+        Usuario.findOneAndUpdate({id:id_aspirante}, {$set:{cursos:aspiranteEncontrado.cursos}}, (err, resultado) =>{
+            if(err){
+                return console.log(err);
+            }
+        });
         return 1;
     }
     else{
@@ -278,7 +302,6 @@ const mostrarCursosAspirante = codigo => {
         if(cursos == undefined){
             cursos= [];
         }
-        console.log(cursos);
         return cursos;
     }
 }
@@ -296,8 +319,13 @@ const eliminarCursoDeAspirante = (id_aspirante, id_curso) => {
         // POr lo que el aspirante si tienee cursos
         let cursosSobrantes = cursosAspirante.filter(buscar => buscar.idCurso != id_curso);
         aspirante.cursos = cursosSobrantes;
+        // LISTO 
         eliminarAspirante(id_aspirante, id_curso);
-        guardar('./src/usuarios.json', listaUsuarios);
+        Usuario.findOneAndUpdate({id:id_aspirante}, {$set:{cursos:aspirante.cursos}}, (err, resultado) =>{
+            if(err){
+                return console.log(err);
+            }
+        });
     }
 }
 // =====================================
@@ -317,7 +345,13 @@ const eliminarAspirante = (id_aspirante, id_curso) =>{
         let sobrantes = aspirantes.filter(filtro => filtro.id != id_aspirante);
 
         curso.aspirantes = sobrantes;
-        guardar('./src/cursos.json',listaCursos);
+
+        Curso.findOneAndUpdate({idCurso:id_curso}, {$set:{aspirantes:curso.aspirantes}},
+            (err, resultado) => {
+                if(err){
+                    return console.log(err);
+                }
+            })
     }
 
 }
@@ -353,7 +387,12 @@ const updateAspirante = (id_aspirante, id_curso, aspirante) =>{
         }
         sobrantes.push(nuevoAspirante);
         curso.aspirantes = sobrantes;
-        guardar('./src/cursos.json',listaCursos);
+        Curso.findOneAndUpdate({idCurso:id_curso}, {$set:{cursos:sobrantes}}, (err, resultado)=>{
+                if(err){
+                    return console.log(err);
+                }
+            }
+        )
     }
 
 }
@@ -374,7 +413,7 @@ const actualizarCurso =  (idAspirante,aspirante) => {
 // ACTUALIZACION ASPIRANTE DESDE UN COORDINADOR
 // =============================================
 
-const actualizarAspirante = (id_aspirante, nombreNuevo, correoNuevo, telefonoNuevo,tipo) =>{
+const actualizarAspirante = (id_aspirante, nombreNuevo, correoNuevo, telefonoNuevo,tipoNuevo) =>{
     listar();
     let aspiranteActualizar = listaUsuarios.find(buscar => buscar.id == id_aspirante);
     if(!aspiranteActualizar){
@@ -385,29 +424,55 @@ const actualizarAspirante = (id_aspirante, nombreNuevo, correoNuevo, telefonoNue
         // Posiblemente lleguen 
         if(nombreNuevo != undefined){
             aspiranteActualizar.nombre = nombreNuevo;
+            Usuario.findOneAndUpdate({id:id_aspirante}, {$set:{nombre:nombreNuevo}},
+            (err,resultado) =>{
+                if(err){
+                    return console.log(err);
+                }
+            });
         }
         if(correoNuevo != undefined){
             aspiranteActualizar.correo = correoNuevo;
+            Usuario.findOneAndUpdate({id:id_aspirante}, {$set:{correo:correoNuevo}},
+                (err,resultado) =>{
+                    if(err){
+                        return console.log(err);
+                    }
+                });
         }
         if(telefonoNuevo != undefined){
             aspiranteActualizar.telefono = telefonoNuevo;
+            Usuario.findOneAndUpdate({id:id_aspirante}, {$set:{telefono:telefonoNuevo}},
+                (err,resultado) =>{
+                    if(err){
+                        return console.log(err);
+                    }
+                });
         }
         if(tipo != undefined){
             aspiranteActualizar.tipoUsuario = tipo;
+            Usuario.findOneAndUpdate({id:id_aspirante}, {$set:{tipo:tipoNuevo}},
+                (err,resultado) =>{
+                    if(err){
+                        return console.log(err);
+                    }
+                });
         }
-        guardar('./src/usuarios.json', listaUsuarios);
+        
         actualizarCurso(aspiranteActualizar.id, aspiranteActualizar);
         return 1;
     }
 }
 module.exports = {
-    cerrarCurso,
-    mostrarCursosDisponibles,
-    agregarCurso,
-    buscarCurso,
-    mostrarCursosAspirante,
-    verificarCurso,
-    eliminarCursoDeAspirante,
-    mostrarAspirantesCurso,
-    actualizarAspirante
+    listar, // Checked
+    guardar,
+    leerCursos,// Checked
+    mostrarCursosDisponibles,//Checked
+    agregarCurso,// Checked
+    buscarCurso,// Checked
+    mostrarCursosAspirante,// CHECKED
+    verificarCurso,// CHECKED
+    eliminarCursoDeAspirante,// CHECKED
+    mostrarAspirantesCurso,// CHECKED
+    actualizarAspirante// CHECKED
 }

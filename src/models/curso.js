@@ -32,6 +32,9 @@ const cursoSchema = new Schema({
     },
     intensidad:{
         type:String
+    },
+    aspirantes:{
+        type:Array
     }
 });
 
