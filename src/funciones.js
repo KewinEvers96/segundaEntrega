@@ -206,21 +206,24 @@ const mostrarCursosDisponibles = () =>
 // Agregar aspirante a las lista aspirantes en un cursos
 // tiene que ser el documento del aspirante
 const agregarAspirante= (aspirante, codigoCurso) => {
-    leerCursos();
-    let curso = listaCursos.find(buscar => buscar.idCurso == codigoCurso);
+    // leerCursos();
+    // let curso = listaCursos.find(buscar => buscar.idCurso == codigoCurso);
     
-    aspirantesDelCurso = curso.aspirantes;
+    Curso.findOne({idCurso:codigoCurso}, (err, curso) =>{
+        aspirantesDelCurso = curso.aspirantes;
 
-    if(aspirantesDelCurso == undefined){
-        aspirantesDelCurso = [];
-    }
-    aspirantesDelCurso.push(aspirante);
-    curso.aspirantes = aspirantesDelCurso;
-    Curso.findOneAndUpdate({idCurso:codigoCurso},{$set:{aspirantes:curso.aspirantes}}, (err, resultado) =>{
-        if(err){
-            return console.log(err);
+        if(aspirantesDelCurso == undefined){
+            aspirantesDelCurso = [];
         }
-    });
+        aspirantesDelCurso.push(aspirante);
+        curso.aspirantes = aspirantesDelCurso;
+        Curso.findOneAndUpdate({idCurso:codigoCurso},{$set:{aspirantes:aspirantesDelCurso}}, (err, resultado) =>{
+            if(err){
+                return console.log(err);
+            }
+        });
+    })
+    
 }
 
 
@@ -233,67 +236,73 @@ const agregarCurso = (id_curso,id_aspirante) => {
     // listar();
     // let aspiranteEncontrado = listaUsuarios.find(buscar => buscar.id == id_aspirante);
     // let curso = buscarCurso(id_curso);
-    Usuario.findOne({id:id_aspirante}, (err, resultado) =>{
-        if(!resultado){
+    // Busqueda del aspirante
+    Usuario.findOne({id:id_aspirante}, (err, aspirante) =>{
+        if(err){
+            return console.log(err);
+        }
+        if(!aspirante){
             // aspirante con ese codigo no encontrado
             console.log('Aspirante no existe');
             return -1;
         }   
         else{
-            // Hay que buscar el curso 
-            if(curso == -1){
-                // No encontró el curso
-                console.log('Curso no existe');
-                return -1;
+            // Obtengo los cursos del aspirante
+            cursosAspirante = aspirante.cursos;
+            if(cursosAspirante  == undefined){
+                cursosAspirante = [];
             }
-            else{
-                cursosAspirante = aspiranteEncontrado.cursos;
-                if(cursosAspirante  == undefined){
-                    cursosAspirante = [];
+            // Busqueda del curso
+            Curso.findOne({idCurso:id_curso}, (err, curso) =>{
+                if(err){
+                    return console.log(err);
                 }
-            }
+
+                if(!curso){
+                    return console.log("curso no encontrado");
+                }
+
+                let duplicado = cursosAspirante.find(buscar => buscar.idCurso ==id_curso);
+                
+                // duplicado curso
+                if(!duplicado){
+                    // Objeto aspirante que no incluya el campo cursos y el campo tipo
+                    nuevoAspirante = {
+                        id:aspirante.id,
+                        nombre:aspirante.nombre,
+                        correo:aspirante.correo,
+                        telefono:aspirante.telefono,
+                        tipoUsuario:aspirante.tipoUsuario
+                    }
+                    // LISTO 
+                    agregarAspirante(nuevoAspirante, id_curso);// LISTO 
+                    // Objeto cursos que no incluya el campo de aspirantes y el campo de tipo
+                    nuevoCurso = {
+                        idCurso:curso.idCurso,
+                        nombre:curso.nombre, 
+                        descripcion:curso.descripcion,
+                        valor:curso.valor,
+                        modalidad:curso.modalidad,
+                        intensidad:curso.intensidad,
+                        estado:curso.estado
+                    }   
+                    cursosAspirante.push(nuevoCurso);
+                    Usuario.findOneAndUpdate({id:id_aspirante}, {$set:{cursos:cursosAspirante}}, (err, resultado) =>{
+                        if(err){
+                            return console.log(err);
+                        }
+                    });
+                    return 1;
+                }
+                else{
+                    // encontro un curso con código igual
+                    console.log("Error curso duplicado");
+                    return -1;
+                }
+            }); 
         }
     });
-
     
-
-    let duplicado = cursosAspirante.find(buscar => buscar.idCurso ==id_curso);
-    // duplicado curso
-    if(!duplicado){
-        // Objeto aspirante que no incluya el campo cursos y el campo tipo
-        nuevoAspirante = {
-            id:aspiranteEncontrado.id,
-            nombre:aspiranteEncontrado.nombre,
-            correo:aspiranteEncontrado.correo,
-            telefono:aspiranteEncontrado.telefono,
-            tipoUsuario:aspiranteEncontrado.tipoUsuario
-        }
-        // LISTO 
-        agregarAspirante(nuevoAspirante, id_curso);// LISTO 
-        // Objeto cursos que no incluya el campo de aspirantes y el campo de tipo
-        nuevoCurso = {
-            idCurso:curso.idCurso,
-            nombre:curso.nombre, 
-            descripcion:curso.descripcion,
-            valor:curso.valor,
-            modalidad:curso.modalidad,
-            intensidad:curso.intensidad,
-            estado:curso.estado
-        }   
-        cursosAspirante.push(nuevoCurso);
-        aspiranteEncontrado.cursos = cursosAspirante;
-        Usuario.findOneAndUpdate({id:id_aspirante}, {$set:{cursos:aspiranteEncontrado.cursos}}, (err, resultado) =>{
-            if(err){
-                return console.log(err);
-            }
-        });
-        return 1;
-    }
-    else{
-        // encontro un curso con código igual
-        console.log("Error curso duplicado");
-        return -1;
-    }
 }
 
 // =====================================
