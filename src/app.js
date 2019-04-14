@@ -167,7 +167,17 @@ app.get('/coordinador/usuarioEditado', function (req, res) {
   phoneNumber = parseInt(req.query.phoneNumber);
   tipoUsuario = req.query.tipoUsuario;
   funciones.actualizarAspirante(idUsuario, name, email, phoneNumber, tipoUsuario);
-    res.render('usuario/coordinador/usuarios.hbs',{id:idingreso})
+  
+  setTimeout(function() {
+    Usuario.find({}, (err, usuarios) =>{
+      if(err){
+        console.log(err);
+      }
+      res.render('usuario/coordinador/usuarios.hbs',{id:idingreso, listado:usuarios});
+    });
+  },1000);
+  
+  
 });
 
 ////////////////////////////////////////////////////////////////////////////////////////////

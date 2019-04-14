@@ -448,11 +448,42 @@ const updateAspirante = (id_aspirante, id_curso, aspirante) =>{
 // ============================================
 
 const actualizarCurso =  (idAspirante,aspirante) => {
-    leerCursos();
-    codigos = codigos_cursos(idAspirante);
-    codigos.forEach(codigo => {
-        updateAspirante(idAspirante,codigo, aspirante);
+    // leerCursos();
+    // codigos = codigos_cursos(idAspirante);
+    // codigos.forEach(codigo => {
+    //     updateAspirante(idAspirante,codigo, aspirante);
+    // });
+    
+    Usuario.findOne({id:idAspirante} , (err, usuario) => {
+        if(err){
+            return console.log(err);
+        }
+        cursosUsuario = usuario.cursos;
+        cursosUsuario.forEach(curso =>{
+            Curso.findOne({idCurso:curso.idCurso}, (err, resultado) =>{
+            if(err){
+                return console.log(err);
+            }
+            aspirantes = resultado.aspirantes;
+            let sobrantes = aspirantes.filter(filtro => filtro.id != idAspirante);
+            let nuevoAspirante = {
+                id:aspirante.id,
+                nombre:aspirante.nombre,
+                correo:aspirante.correo,
+                telefono:aspirante.telefono,
+                tipoUsuario:aspirante.tipoUsuario
+            }
+            sobrantes.push(nuevoAspirante);
+            Curso.findOneAndUpdate({idCurso:resultado.idCurso}, {$set:{aspirantes:sobrantes}}, (err, resultado)=>{
+                    if(err){
+                        return console.log(err);
+                    }
+                }
+            )   
+            });
+        });
     });
+    
 }
 
 // =============================================
@@ -460,54 +491,58 @@ const actualizarCurso =  (idAspirante,aspirante) => {
 // =============================================
 
 const actualizarAspirante = (id_aspirante, nombreNuevo, correoNuevo, telefonoNuevo,tipoNuevo) =>{
-    listar();
-    let aspiranteActualizar = listaUsuarios.find(buscar => buscar.id == id_aspirante);
-    if(!aspiranteActualizar){
-        console.log('estudiante no encontrado');
-        return -1;
-    }
-    else {
-        // Posiblemente lleguen 
-        if(nombreNuevo != undefined){
-            aspiranteActualizar.nombre = nombreNuevo;
-            Usuario.findOneAndUpdate({id:id_aspirante}, {$set:{nombre:nombreNuevo}},
-            (err,resultado) =>{
-                if(err){
-                    return console.log(err);
-                }
-            });
+    Usuario.findOne({id:id_aspirante}, (err, aspiranteActualizar) =>{
+        if(err){
+            return console.log(err);
         }
-        if(correoNuevo != undefined){
-            aspiranteActualizar.correo = correoNuevo;
-            Usuario.findOneAndUpdate({id:id_aspirante}, {$set:{correo:correoNuevo}},
+        if(!aspiranteActualizar){
+            console.log('estudiante no encontrado');
+            return -1;
+        }
+        else {
+            // Posiblemente lleguen 
+            if(nombreNuevo != undefined){
+                aspiranteActualizar.nombre = nombreNuevo;
+                Usuario.findOneAndUpdate({id:id_aspirante}, {$set:{nombre:nombreNuevo}},
                 (err,resultado) =>{
                     if(err){
                         return console.log(err);
                     }
                 });
+            }
+            if(correoNuevo != undefined){
+                aspiranteActualizar.correo = correoNuevo;
+                Usuario.findOneAndUpdate({id:id_aspirante}, {$set:{correo:correoNuevo}},
+                    (err,resultado) =>{
+                        if(err){
+                            return console.log(err);
+                        }
+                    });
+            }
+            if(telefonoNuevo != undefined){
+                aspiranteActualizar.telefono = telefonoNuevo;
+                Usuario.findOneAndUpdate({id:id_aspirante}, {$set:{telefono:telefonoNuevo}},
+                    (err,resultado) =>{
+                        if(err){
+                            return console.log(err);
+                        }
+                    });
+            }
+            if(tipoNuevo != undefined){
+                aspiranteActualizar.tipoUsuario = tipoNuevo;
+                Usuario.findOneAndUpdate({id:id_aspirante}, {$set:{tipo:tipoNuevo}},
+                    (err,resultado) =>{
+                        if(err){
+                            return console.log(err);
+                        }
+                    });
+            }
+            
+            actualizarCurso(aspiranteActualizar.id, aspiranteActualizar);
+            return 1;
         }
-        if(telefonoNuevo != undefined){
-            aspiranteActualizar.telefono = telefonoNuevo;
-            Usuario.findOneAndUpdate({id:id_aspirante}, {$set:{telefono:telefonoNuevo}},
-                (err,resultado) =>{
-                    if(err){
-                        return console.log(err);
-                    }
-                });
-        }
-        if(tipo != undefined){
-            aspiranteActualizar.tipoUsuario = tipo;
-            Usuario.findOneAndUpdate({id:id_aspirante}, {$set:{tipo:tipoNuevo}},
-                (err,resultado) =>{
-                    if(err){
-                        return console.log(err);
-                    }
-                });
-        }
-        
-        actualizarCurso(aspiranteActualizar.id, aspiranteActualizar);
-        return 1;
-    }
+    });
+    
 }
 
 /// Es imposible hay que cambiar todo 
