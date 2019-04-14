@@ -157,18 +157,22 @@ const mostrarAspirantesCurso = idCurso => {
     }
 }
 
-// VERIFICAR UN CURSO
-
-const verificarCurso = idCurso => {
-    leerCursos();
-    let cursoAVerificar = listaCursos.find(buscar => buscar.idCurso == idCurso);
-    if(cursoAVerificar.estado == "disponible"){
-        return true;
-    }
-    else{
-        return false;
-    }
+// // VERIFICAR UN CURSO
+// // CHECKED
+const verificarCurso = id_curso => {
+    Curso.findOne({idCurso:id_curso}, (err, resultado) => {
+        if(err) {
+            console.log(err);
+        }
+        if(resultado.estado == "disponible"){
+            return true;
+        }
+        else{
+            return false;
+        }
+    });
 }
+
 // Creación de un nuevo curso
 const crearCurso = (_id, _nombre, _descripcion, _valor, _modalidad, _intensidad ) => {
     leerCursos();

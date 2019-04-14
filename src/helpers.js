@@ -180,8 +180,8 @@ hbs.registerHelper('misCursos', listaCursos => {
     return tablaT;
 })
 
-hbs.registerHelper('mostrarAspirantes', (idCurso) => {
-    aspirantes = funciones.mostrarAspirantesCurso(idCurso);
+hbs.registerHelper('mostrarAspirantes', (idCurso,aspirantes) => {
+    
     tablaT = "<table border=1 class='table table-hover'><thead class='thead-dark'>\
     <th scope='col'>Identificación</th>\
     <th scope='col'>Nombre</th>\
