@@ -174,7 +174,13 @@ app.get('/aspirante/home', function (req, res) {
 });
 
 app.get('/aspirante/cursos', function (req, res) {
-  	res.render('usuario/aspirante/cursos.hbs',{id:idingreso})
+    Curso.find({estado:'disponible'}, (err, resultado) =>{
+      if(err){
+        console.log(err);
+      }
+      res.render('usuario/aspirante/cursos.hbs',{id:idingreso, cursos_disponibles:resultado});
+    })
+  	
 });
 
 app.get('/aspirante/inscripcion', function (req, res) {
