@@ -57,15 +57,14 @@ hbs.registerHelper('listarDisponibles', (cursosDisponibles) =>{
     return tablaT;
 });
 
-hbs.registerHelper('listarOferta', () =>{
-    cursosDisponibles = funciones.mostrarCursosDisponibles();
+hbs.registerHelper('listarOferta', (listado) =>{
     tablaT = "<table border=1 class='table table-hover'><thead class='thead-dark'>\
     <th scope='col'>Nombre curso</th>\
     <th scope='col'>Descripción</th>\
     <th scope='col'>Valor</th>\
     </thead><tbody>";
 
-    cursosDisponibles.forEach(curso => {
+    listado.forEach(curso => {
        tablaT = tablaT +  "<tr>" +
         "</td><td><form action='/descripcion' method='get'>" + 
         "<input type='hidden' name='idCurso' value='" + curso.idCurso + 

@@ -319,7 +319,13 @@ app.get('/descripcion', function (req, res) {
 });
 
 app.get('/oferta', function (req, res) {
-  res.render('oferta.hbs')
+  Curso.find({estado:"disponible"}, (err, cursos) => {
+    if(err){
+      return console.log(err);
+    }
+    res.render('oferta.hbs', {listado:cursos});
+  });
+  
 });
 
 app.get('/index', function (req, res) {

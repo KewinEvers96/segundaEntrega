@@ -141,9 +141,7 @@ const recorrerCursosActualizar = (idcurso) =>{
                         intensidad:ncurso.intensidad,
                         estado:"cerrado"
                     };
-                    console.log(sobrantes);
                     sobrantes.push(nuevoCurso);
-                    console.log(sobrantes);
                     Usuario.findOneAndUpdate({id:idi}, {$set:{cursos:sobrantes}}, (err, res) =>{
                         if(err){
                             return console.log(err);
