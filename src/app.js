@@ -31,7 +31,7 @@ mongoose.connect("mongodb://localhost:27017/baseDeDatos", (err,result) =>{
 
 
 
-
+////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -208,26 +208,18 @@ app.get('/docente/home', function (req, res) {
         listaCursos:resultado.cursos
       });
     });
-    
 });
 
 app.get('/docente/cursos', function (req, res) {
     res.render('usuario/docente/cursos.hbs',{id:idingreso})
 });
 
-app.get('/docente/inscripcion', function (req, res) {
-  idCurso = parseInt(req.query.idCurso);
-  funciones.agregarCurso(idCurso, idingreso);
-    res.render('usuario/docente/inscripcion.hbs',{id:idingreso})
+app.get('/docente/verCurso', function (req, res) {
+  id_curso = parseInt(req.query.idCurso);
+  Curso.findOne({idCurso:id_curso}, (err,resultado) =>{
+    res.render('usuario/docente/verCurso.hbs',{id:idingreso, id_curso:id_curso, aspirantes:resultado.aspirantes})
+    })
 });
-
-app.get('/docente/eliminarCurso', function (req, res) {
-  idCurso = parseInt(req.query.idCurso);
-  funciones.eliminarCursoDeAspirante(idingreso, idCurso);
-    res.render('usuario/docente/home.hbs',{id:idingreso})
-});
-
-
 
 
 
