@@ -197,29 +197,39 @@ app.get('/register', function (req, res) {
 });
 
 app.get('/requestLogin', function (req, res) {
-	id = parseInt(req.query.document);
-	listaUsuarios = require('./usuarios.json');
-    let usuario = listaUsuarios.find(buscar => buscar.id == id);
-    if(!usuario){
-        res.render('login.hbs')    
-    }else{
+
+    Usuario.findOne({id:req.query.document}, (err, resultado) => {
+      // resultado, es el usuario resultado de la busqueda
+      if(err){
+        return console.log(err);
+      }
+      if(!resultado){
+        return res.render('login.hbs')
+      }
+      
         // el usuario está
-        switch(usuario.tipoUsuario){
-            case "aspirante":
-            	idingreso = id;
-            	res.render('usuario/aspirante/home.hbs',{id:idingreso})
-            break;
-            case "coordinador":
-            	idingreso = id;
-            	res.render('usuario/coordinador/home.hbs',{id:idingreso})
-            // Codigo
-            break;
-            case "docente":
-              idingreso = id;
-              res.render('usuario/docente/home.hbs',{id:idingreso})
-            break;
-        }
-    }
+      switch(resultado.tipoUsuario){
+          case "aspirante":
+            idingreso = resultado.id;
+            res.render('usuario/aspirante/home.hbs',{id:idingreso})
+          break;
+          case "coordinador":
+            idingreso = resultado.id;
+            res.render('usuario/coordinador/home.hbs',{id:idingreso})
+          // Codigo
+          break;
+          case "docente":
+            idingreso = resultado.id;
+            res.render('usuario/docente/home.hbs',{id:idingreso})
+          break;
+      }
+    });
+	// id = parseInt(req.query.document);
+	// listaUsuarios = require('./usuarios.json');
+  //   let usuario = listaUsuarios.find(buscar => buscar.id == id);
+  //   if(!usuario){
+  //       res.render('login.hbs')    
+    
 });
 
 app.get('/login', function (req, res) {
