@@ -167,7 +167,7 @@ app.get('/coordinador/usuarioEditado', function (req, res) {
   phoneNumber = parseInt(req.query.phoneNumber);
   tipoUsuario = req.query.tipoUsuario;
   funciones.actualizarAspirante(idUsuario, name, email, phoneNumber, tipoUsuario);
-  
+
   setTimeout(function() {
     Usuario.find({}, (err, usuarios) =>{
       if(err){
@@ -344,12 +344,17 @@ app.get('/login', function (req, res) {
 
 app.get('/descripcion', function (req, res) {
 	id = parseInt(req.query.idCurso);
-	curso = funciones.buscarCurso(id);
-	nombre = curso.nombre;
-	descripcion = curso.descripcion;
-	modalidad = curso.modalidad;
-	intensidad = curso.intensidad;
-  	res.render('descripcion.hbs',{id:id, curso:curso, descripcion:descripcion, modalidad:modalidad, intensidad:intensidad, nombre:nombre})
+	Curso.findOne({idCurso:id}, (err, curso) =>{
+    if(err){
+      return console.log(err);
+    }
+    nombre = curso.nombre;
+    descripcion = curso.descripcion;
+    modalidad = curso.modalidad;
+    intensidad = curso.intensidad;
+  	res.render('descripcion.hbs',{id:id, curso:curso, descripcion:descripcion, modalidad:modalidad, intensidad:intensidad, nombre:nombre});
+  });
+	
 });
 
 app.get('/oferta', function (req, res) {
