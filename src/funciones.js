@@ -468,13 +468,10 @@ const actualizarAspirante = (id_aspirante, nombreNuevo, correoNuevo, telefonoNue
 /// Es imposible hay que cambiar todo 
 // Todo lo que retorne algo hay que modificarlo
 module.exports = {
-    listar, // Checked
-    guardar,
-    leerCursos,// Checked
     mostrarCursosDisponibles,//Checked
     agregarCurso,// Checked
     buscarCurso,// Checked
-    mostrarCursosAspirante,// CHECKED
+    mostrarCursosAspirante,// CHECKED // ELIMINADA
     verificarCurso,// CHECKED
     eliminarCursoDeAspirante,// CHECKED
     mostrarAspirantesCurso,// CHECKED

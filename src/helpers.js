@@ -147,6 +147,7 @@ hbs.registerHelper('listarCursos', (listado) =>{
 });
 
 
+// YA NO RECIBE UN CODIGO SINO UNA LISTA DE CURSOS 
 
 hbs.registerHelper('misCursos', listaCursos => {
     tablaT = "<table border=1 class='table table-hover'><thead class='thead-dark'>\

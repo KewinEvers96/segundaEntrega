@@ -150,11 +150,17 @@ app.get('/coordinador/usuarioEditado', function (req, res) {
 });
 
 ////////////////////////////////////////////////////////////////////////////////////////////
-
+// CHECKED
 app.get('/aspirante/home', function (req, res) {
-		res.render('usuario/aspirante/home.hbs',{
-			id:idingreso
-		});
+    Usuario.findOne({id:idingreso}, (err, resultado) => {
+      if(err){
+        return console.log(err);
+      }
+      res.render('usuario/aspirante/home.hbs',{
+        id:idingreso,
+        listaCursos:resultado.cursos
+      });
+    });
 });
 
 app.get('/aspirante/cursos', function (req, res) {
@@ -175,11 +181,18 @@ app.get('/aspirante/eliminarCurso', function (req, res) {
 
 
 /////////////////////////////////////////////////////////////////////////////////////////
-
+// CHECKED
 app.get('/docente/home', function (req, res) {
-    res.render('usuario/docente/home.hbs',{
-      id:idingreso
+    Usuario.findOne({id:idingreso}, (err, resultado) => {
+      if(err){
+        return console.log(err);
+      }
+      res.render('usuario/docente/home.hbs',{
+        id:idingreso,
+        listaCursos:resultado.cursos
+      });
     });
+    
 });
 
 app.get('/docente/cursos', function (req, res) {
@@ -237,6 +250,7 @@ app.get('/register', function (req, res) {
 
 
 // PARA LOGUEARSE 
+// CHECKED
 app.get('/requestLogin', function (req, res) {
 
     Usuario.findOne({id:req.query.document}, (err, resultado) => {
