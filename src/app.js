@@ -108,7 +108,8 @@ app.get('/coordinador/cerrarCurso', function (req, res) {
 
 app.get('/coordinador/cursoCerrado', function (req, res) {
   idcurso = parseInt(req.query.idCurso);
-  funciones.agregarCurso(idcurso, idingreso);
+  documento = parseInt(req.query.document);
+  funciones.agregarCurso(idcurso, documento);
   console.log(idcurso);
   funciones.cerrarCurso(idcurso);
   res.render('usuario/coordinador/cursoCerrado.hbs',{id:idingreso})
