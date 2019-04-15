@@ -7,7 +7,8 @@ const mongoose = require('mongoose');
 const Usuario = require('./models/usuario')
 const Curso = require('./models/curso')
 const bcrypt = require('bcrypt');
-
+// const session = require('express-session')
+// var MemoryStore = require('memorystore')(session)
 
 //const directioriopublico = path.join(__dirname, '../public/img');
 const directioriopartials = path.join(__dirname, '../partials');
@@ -18,6 +19,16 @@ app.set('view engine', 'hbs');
 
 require('./helpers');
 
+
+// app.use(session({
+// 	cookie: { maxAge: 86400000 },
+//  	store: new MemoryStore({
+//       	checkPeriod: 86400000 // prune expired entries every 24h
+//     	}),
+//   	secret: 'keyboard cat',
+//   	resave: true,
+//   	saveUninitialized: true
+// }));
 
 
 mongoose.connect("mongodb://localhost:27017/baseDeDatos", (err,result) =>{
@@ -283,7 +294,7 @@ app.get('/registered', function (req, res) {
   let usuario = new Usuario({
     nombre :req.query.name,
     id : parseInt(req.query.document),
-    password:bcryp.hashSync(req.query.password),
+    password:bcrypt.hashSync(req.query.password,10),
     correo : req.query.email,
     telefono: parseInt(req.query.phoneNumber),
     tipoUsuario:'aspirante'
@@ -310,10 +321,15 @@ app.get('/requestLogin', function (req, res) {
         return res.render('login.hbs')
       }
       
+      if(!bcrypt.compareSync(req.query.password, resultado.password)){
+        return res.render ('login.hbs');
+      }	
         // el usuario está
       switch(resultado.tipoUsuario){
           case "aspirante":
             idingreso = resultado.id;
+            // req.session.id = resultado.id;
+			      // req.session.tipoUsuario = resultado.tipoUsuario;
             Usuario.findOne({id:idingreso}, (err, resultado) => {
               if(err){
                 return console.log(err);
@@ -324,11 +340,15 @@ app.get('/requestLogin', function (req, res) {
           break;
           case "coordinador":
             idingreso = resultado.id;
+            // req.session.id = resultado.id;
+			      // req.session.tipoUsuario = resultado.tipoUsuario;
             res.render('usuario/coordinador/home.hbs',{id:idingreso})
           // Codigo
           break;
           case "docente":
             idingreso = resultado.id;
+            // req.session.id = resultado.tipoUsuario;
+			      // req.session.tipoUsuario = resultado.tipoUsuario;
             Usuario.findOne({id:idingreso}, (err, resultado) => {
               if(err){
                 return console.log(err);
@@ -346,8 +366,17 @@ app.get('/requestLogin', function (req, res) {
     
 });
 
+app.get('/cerrar', function (req, res) {
+  req.session.destroy((err) => {
+    if (err) return console.log(err) 	
+  });
+// localStorage.setItem('token', '');
+  res.render('login.hbs');
+});
+
+
 app.get('/login', function (req, res) {
-  res.render('login.hbs')
+  res.render('login.hbs');
 });
 
 app.get('/descripcion', function (req, res) {
