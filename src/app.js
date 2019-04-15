@@ -103,10 +103,15 @@ app.get('/coordinador/cursoCreado', function (req, res) {
 // ACTUALIZAR ESTADO a cerrado
 app.get('/coordinador/cerrarCurso', function (req, res) {
   idcurso = parseInt(req.query.idCurso);
+  res.render('usuario/coordinador/cerrarCurso.hbs',{id:idingreso, idcurso:idcurso})
+});
+
+app.get('/coordinador/cursoCerrado', function (req, res) {
+  idcurso = parseInt(req.query.idCurso);
+  funciones.agregarCurso(idcurso, idingreso);
   console.log(idcurso);
   funciones.cerrarCurso(idcurso);
-  res.render('usuario/coordinador/cerrarCurso.hbs',{id:idingreso})
-  
+  res.render('usuario/coordinador/cursoCerrado.hbs',{id:idingreso})
 });
 
 // VER CURSO 

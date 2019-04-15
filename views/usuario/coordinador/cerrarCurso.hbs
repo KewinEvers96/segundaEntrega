@@ -7,10 +7,15 @@
 			<button class="btn btn-dark">Volver</button>
 		</form>
 		<br>
-		<div class="jumbotron jumbotron-fluid">
-	  		<div class="container">
-	    		<h1 class="display-4">¡Curso cerrado exitosamente!</h1>
-	  		</div>
+		<div class="container">
+	  		<form action="/coordinador/cursoCerrado" method="get">
+	  			<div class="form-group">
+		    		<label for="document">Seleccione un docente para el curso</label>
+		   	 		<input type="number" class="form-control" name="document" placeholder="Documento del docente" required>
+		   	 		<input type="hidden" value="{{idcurso}}" name="idCurso">
+	  			</div>
+				<button class="btn btn-dark">Aceptar</button>
+			</form>
 		</div>
 
 	</div>
