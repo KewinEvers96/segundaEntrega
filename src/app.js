@@ -15,6 +15,8 @@ const directioriopartials = path.join(__dirname, '../partials');
 //app.use(express.static(directioriopublico));
 hbs.registerPartials(directioriopartials);
 
+const port = process.env.PORT || 3000;
+
 app.set('view engine', 'hbs');
 
 require('./helpers');
@@ -412,6 +414,6 @@ app.get('/', function (req, res) {
   res.render('index.hbs')
 });
 
-app.listen(3000, () => {
-	console.log('Escuchando en el puerto 3000')
+app.listen(port, () => {
+	console.log('Escuchando en el puerto' + port)
 })
