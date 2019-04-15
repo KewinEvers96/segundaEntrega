@@ -6,6 +6,7 @@ const funciones = require('./funciones');
 const mongoose = require('mongoose');
 const Usuario = require('./models/usuario')
 const Curso = require('./models/curso')
+const bcrypt = require('bcrypt');
 
 
 //const directioriopublico = path.join(__dirname, '../public/img');
@@ -282,6 +283,7 @@ app.get('/registered', function (req, res) {
   let usuario = new Usuario({
     nombre :req.query.name,
     id : parseInt(req.query.document),
+    password:bcryp.hashSync(req.query.password),
     correo : req.query.email,
     telefono: parseInt(req.query.phoneNumber),
     tipoUsuario:'aspirante'

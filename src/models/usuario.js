@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+var uniqueValidator = require('mongoose-unique-validator');
 
 const Schema = mongoose.Schema;
 const usuarioSchema = new Schema({
@@ -26,11 +26,16 @@ const usuarioSchema = new Schema({
         trim:true,
         enum:{values:['coordinador', 'aspirante', 'docente']}
     },
+    password:{
+        type:String, 
+        required:true,
+        trim:true
+    },
     cursos:{
         type:Array
     }
 });
-
+usuarioSchema.plugin(uniqueValidator);
 
 const Usuario = mongoose.model('Usuario', usuarioSchema);
 

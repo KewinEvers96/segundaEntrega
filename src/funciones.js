@@ -530,7 +530,7 @@ const actualizarAspirante = (id_aspirante, nombreNuevo, correoNuevo, telefonoNue
             }
             if(tipoNuevo != undefined){
                 aspiranteActualizar.tipoUsuario = tipoNuevo;
-                Usuario.findOneAndUpdate({id:id_aspirante}, {$set:{tipo:tipoNuevo}},
+                Usuario.findOneAndUpdate({id:id_aspirante}, {$set:{tipoUsuario:tipoNuevo}},
                     (err,resultado) =>{
                         if(err){
                             return console.log(err);
