@@ -12,7 +12,8 @@
     "init": "^0.1.2",
     "mongoose": "^5.5.1",
     "mongoose-unique-validator": "^2.0.2",
-    "yargs": "^13.2.2"
+    "yargs": "^13.2.2",
+    "sendgrid": "^1.5.0"
   },
   "devDependencies": {},
   "scripts": {

@@ -306,7 +306,7 @@ app.get('/registered', function (req, res) {
   });
   const msg ={
     to: req.query.email, 
-    from: 'kewin4evers@gmail.com',
+    from: 'kewin4@gmail.com',
     subject: 'Bienvenido',
     text:'Has sido registrado satisfactoriamente'
   }
