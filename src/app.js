@@ -9,6 +9,35 @@ const Curso = require('./models/curso')
 const bcrypt = require('bcrypt');
 // const session = require('express-session')
 // var MemoryStore = require('memorystore')(session)
+require('./config/config')
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);  
+
+// const { Usuarios } = require('./usuarios');
+// const usuarios = new Usuarios();
+
+
+// PARTE DEL CHAT 
+io.on('connection', client => {
+
+  // // USUARIO NUEVO 
+  // client.on('usuarioNuevo', (usuario) =>{
+	// 	let listado = usuarios.agregarUsuario(client.id, usuario)
+	// 	console.log(listado)
+	// 	let texto = `Se ha conectado ${usuario}`
+	// 	io.emit('nuevoUsuario', texto )
+  // });
+
+
+  
+  client.on("textoPrivado", (text, callback) =>{
+		// let usuario = usuarios.getUsuario(client.id)
+		let texto = `${text.mensajePrivado}`
+		let destinatario = usuarios.getDestinatario(text.destinatario)
+		client.broadcast.to(destinatario.id).emit("textoPrivado", (texto))
+		callback()
+	})
+})
 
 //const directioriopublico = path.join(__dirname, '../public/img');
 const directioriopartials = path.join(__dirname, '../partials');
@@ -19,7 +48,7 @@ const port = process.env.PORT || 3000;
 
 
 var sgMail = require('@sendgrid/mail');
-sgMail.setApiKey(nad);
+sgMail.setApiKey('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');
 
 app.set('view engine', 'hbs');
 
@@ -37,7 +66,7 @@ require('./helpers');
 // }));
 
 
-mongoose.connect(process.env.URLDB,{useNewUrlParser:true}, (err,result) =>{
+mongoose.connect('mongodb://localhost:27017/baseDeDatos',{useNewUrlParser:true}, (err,result) =>{
   if(err){
       return console.log(err);
   }
@@ -486,6 +515,6 @@ app.get('/', function (req, res) {
   res.render('index.hbs')
 });
 
-app.listen(port, () => {
+server.listen(port, () => {
 	console.log('Escuchando en el puerto' + port)
 })
