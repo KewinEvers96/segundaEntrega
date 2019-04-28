@@ -308,7 +308,12 @@ app.get('/registered', function (req, res) {
     to: req.query.email, 
     from: 'kewin4@gmail.com',
     subject: 'Bienvenido',
-    text:'Has sido registrado satisfactoriamente'
+    text:'Has sido registrado satisfactoriamente',
+    html: '<p> Tu registro con tus datos:<ul>'+
+          '<li>Documento de identidad: </li>'+ req.query.document+
+          '<li>Nombre</li>'+ req.query.nombre + 
+          '<li>Telefono</li>' + req.query.telefono +
+          ' </ul></p>'
   }
   
 
