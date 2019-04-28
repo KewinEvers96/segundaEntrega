@@ -19,7 +19,7 @@ const port = process.env.PORT || 3000;
 
 
 var sgMail = require('@sendgrid/mail');
-sgMail.setApiKey('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');
+sgMail.setApiKey();
 
 app.set('view engine', 'hbs');
 
