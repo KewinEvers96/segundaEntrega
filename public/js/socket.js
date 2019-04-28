@@ -5,7 +5,6 @@ var param = new URLSearchParams(window.location.search);
 const formulario = document.querySelector('#formulario');
 const destinatario = formulario.querySelector('#destinatario');
 const mensaje = formulario.querySelector('#message');
-const chat 
 
 
 socket.on("connect",() =>{
