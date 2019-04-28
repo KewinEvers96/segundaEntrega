@@ -226,10 +226,7 @@ hbs.registerHelper('listarUsuarios', (listado) =>{
         "</td><td>" + usuario.correo + 
         "</td><td>" + usuario.telefono + 
         "</td><td>" + usuario.tipoUsuario + 
-        "</td><td><form action='/coordinador/editarUsuario' method='get'>" +
-        "<input type='hidden' name='idUsuario' value='" + usuario.id + 
-        "'><button class='btn btn-outline-dark'>Editar</button></form>"
-        "<form action='/coordinador/enviarMensaje' method='get'>" +
+        "</td><td><form action='/coordinador/enviarMensaje' method='get'>" +
         "<input type='hidden' name='idUsuario' value='" + usuario.id + 
         "'><button class='btn btn-outline-dark'>Enviar mensaje</button></form>"
         "</td></tr>";
