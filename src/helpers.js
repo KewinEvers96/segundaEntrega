@@ -218,7 +218,6 @@ hbs.registerHelper('listarUsuarios', (listado) =>{
     <th scope='col-md-1'>Telefono</th>\
     <th scope='col-md-1'>Tipo de usuario</th>\
     <th scope='col-md-1'> </th>\
-    <th scope='col-md-1'> </th>\
     </thead><tbody>";
 
     listado.forEach(usuario => {
@@ -230,7 +229,7 @@ hbs.registerHelper('listarUsuarios', (listado) =>{
         "</td><td><form action='/coordinador/enviarMensaje' method='get'>" +
         "<input type='hidden' name='idUsuario' value='" + usuario.id + 
         "'><button class='btn btn-outline-dark'>Enviar mensaje</button></form>"
-        "</td><td><form action='/coordinador/editarUsuario' method='get'>" +
+        "<form action='/coordinador/editarUsuario' method='get'>" +
         "<input type='hidden' name='idUsuario' value='" + usuario.id + 
         "'><button class='btn btn-outline-dark'>Editar</button></form>"
         "</td></tr>";
