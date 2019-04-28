@@ -316,15 +316,30 @@ app.get('/registered', function (req, res) {
           ' </ul></p>'
   }
   
+  // NO puede existir dos usuarios con el mismo correo
 
-  usuario.save((err, resultado) =>{
+  Usuario.findOne({correo:req.query.email}, (err, resultado) =>{
     if(err){
       console.log(err);
     }
-    sgMail.send(msg);
+
+    if(!resultado){
+      // GUARDA AL USUARIO 
+      usuario.save((err, result) =>{
+        if(err){
+          console.log(err);
+        }
+        sgMail.send(msg);
+      });
+      // ENVIA AL LOGIN
+      res.render('login.hbs');
+    }
+    else{
+      // SI HAY UN MISMO CORREO
+      res.render('login.hbs')
+    }
   });
   
-  res.render('login.hbs');
 });
 
 app.get('/register', function (req, res) {
