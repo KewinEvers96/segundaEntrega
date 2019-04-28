@@ -362,7 +362,7 @@ hbs.registerHelper('mostrarAspirantosos', (idCurso,aspirantes) => {
         "</td><td><form action='/docente/enviarMensaje' method='get'>" +
         "<input type='hidden' name='idUsuario' value='" + aspirante.id + 
         "'><input type='hidden' name='idCurso' value='" + idCurso  + 
-        "'><button class='btn btn-outline-dark'>Enviar mensaje</button></form>"
+        "'><button class='btn btn-outline-dark'>Enviar mensaje</button></form>" +
         "</td></tr>"
     });
 
