@@ -198,9 +198,21 @@ app.get('/coordinador/usuarioEditado', function (req, res) {
       }
       res.render('usuario/coordinador/usuarios.hbs',{id:idingreso, listado:usuarios});
     });
-  },1000);
-  
-  
+  },1000); 
+});
+
+app.get('/coordinador/enviarMensaje', function (req, res) {
+  idUsuario = parseInt(req.query.idUsuario);
+    res.render('usuario/coordinador/enviarMensaje.hbs',{id:idingreso, idUsuario:idUsuario})
+});
+
+app.get('/coordinador/mensajeEnviado', function (req, res) {
+  mensaje :req.query.message
+  idUsuario = parseInt(req.query.idUsuario);
+
+  //socket
+
+    res.render('usuario/coordinador/mensajeEnviado.hbs',{id:idingreso, idUsuario:idUsuario})
 });
 
 ////////////////////////////////////////////////////////////////////////////////////////////
@@ -250,6 +262,11 @@ app.get('/aspirante/eliminarCurso', function (req, res) {
     
 });
 
+app.get('/aspirante/mensajes', function (req, res) {
+
+    res.render('usuario/aspirante/mensajes.hbs',{id:idingreso})
+});
+
 
 /////////////////////////////////////////////////////////////////////////////////////////
 // CHECKED
@@ -276,8 +293,26 @@ app.get('/docente/verCurso', function (req, res) {
     })
 });
 
+app.get('/docente/enviarMensaje', function (req, res) {
+  idUsuario = parseInt(req.query.idUsuario);
+  idCurso = parseInt(req.query.idCurso);
+    res.render('usuario/docente/enviarMensaje.hbs',{id:idingreso, idUsuario:idUsuario, idCurso:idCurso})
+});
 
+app.get('/docente/mensajeEnviado', function (req, res) {
+  mensaje :req.query.message
+  idUsuario = parseInt(req.query.idUsuario);
+  idCurso = parseInt(req.query.idCurso);
 
+  //socket
+
+    res.render('usuario/docente/mensajeEnviado.hbs',{id:idingreso, idUsuario:idUsuario, idCurso:idCurso})
+});
+
+app.get('/docente/mensajes', function (req, res) {
+
+    res.render('usuario/docente/mensajes.hbs',{id:idingreso})
+});
 
 
 
