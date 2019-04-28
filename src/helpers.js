@@ -212,12 +212,13 @@ hbs.registerHelper('mostrarAspirantes', (id,aspirantes,idCurso) => {
 hbs.registerHelper('listarUsuarios', (listado) =>{
 
     tablaT = "<table border=1 class='table table-hover'><thead class='thead-dark'>\
-    <th scope='col'>Identificación</th>\
-    <th scope='col'>Nombre</th>\
-    <th scope='col'>Correo</th>\
-    <th scope='col'>Telefono</th>\
-    <th scope='col'>Tipo de usuario</th>\
-    <th scope='col'> </th>\
+    <th scope='col-md-1'>Identificación</th>\
+    <th scope='col-md-1'>Nombre</th>\
+    <th scope='col-md-1'>Correo</th>\
+    <th scope='col-md-1'>Telefono</th>\
+    <th scope='col-md-1'>Tipo de usuario</th>\
+    <th scope='col-md-1'> </th>\
+    <th scope='col-md-1'> </th>\
     </thead><tbody>";
 
     listado.forEach(usuario => {
@@ -229,7 +230,7 @@ hbs.registerHelper('listarUsuarios', (listado) =>{
         "</td><td><form action='/coordinador/enviarMensaje' method='get'>" +
         "<input type='hidden' name='idUsuario' value='" + usuario.id + 
         "'><button class='btn btn-outline-dark'>Enviar mensaje</button></form>"
-        "<form action='/coordinador/editarUsuario' method='get'>" +
+        "</td><td><form action='/coordinador/editarUsuario' method='get'>" +
         "<input type='hidden' name='idUsuario' value='" + usuario.id + 
         "'><button class='btn btn-outline-dark'>Editar</button></form>"
         "</td></tr>";
