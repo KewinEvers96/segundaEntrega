@@ -39,9 +39,9 @@ io.on('connection', client => {
 	})
 })
 
-//const directioriopublico = path.join(__dirname, '../public/img');
+const directioriopublico = path.join(__dirname, '../public');
 const directioriopartials = path.join(__dirname, '../partials');
-//app.use(express.static(directioriopublico));
+app.use(express.static(directioriopublico));
 hbs.registerPartials(directioriopartials);
 
 const port = process.env.PORT || 3000;
