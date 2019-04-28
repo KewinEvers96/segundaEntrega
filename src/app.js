@@ -19,7 +19,7 @@ const port = process.env.PORT || 3000;
 
 
 const sgMail = require('@sendgrid/mail');
-
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 app.set('view engine', 'hbs');
 
@@ -311,7 +311,6 @@ app.get('/registered', function (req, res) {
     text:'Has sido registrado satisfactoriamente'
   }
   
-  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
   usuario.save((err, resultado) =>{
     if(err){
