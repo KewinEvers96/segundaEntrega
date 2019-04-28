@@ -14,6 +14,7 @@ const usuarioSchema = new Schema({
     },
     correo:{
         type:String,
+        required:true,
         trim:true
     },
     telefono:{

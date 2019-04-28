@@ -33,14 +33,14 @@ require('./helpers');
 // }));
 
 
-mongoose.connect(process.env.URLDB, (err,result) =>{
+mongoose.connect(process.env.URLDB,{useNewUrlParser:true}, (err,result) =>{
   if(err){
       return console.log(err);
   }
   console.log("conectado");
 });
 
-
+const sgMail = process.env.SENDGRID_API_KEY;
 
 
 
@@ -301,8 +301,21 @@ app.get('/registered', function (req, res) {
     telefono: parseInt(req.query.phoneNumber),
     tipoUsuario:'aspirante'
   });
-  usuario.save();
-  res.render('login.hbs')
+  const msg ={
+    to: req.query.email, 
+    from: 'kewin4evers@gmail.com',
+    subject: 'Bienvenido',
+    text:'Has sido registrado satisfactoriamente'
+  }
+  
+  usuario.save((err, resultado) =>{
+    if(err){
+      console.log(err);
+    }
+    sgMail.send(msg);
+  });
+  
+  res.render('login.hbs');
 });
 
 app.get('/register', function (req, res) {
