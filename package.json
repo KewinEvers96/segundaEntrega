@@ -13,7 +13,7 @@
     "mongoose": "^5.5.1",
     "mongoose-unique-validator": "^2.0.2",
     "yargs": "^13.2.2",
-    "@sendgrid/mail": "1.9.2" 
+    "@sendgrid": "1.9.2" 
   },
   "devDependencies": {},
   "scripts": {
