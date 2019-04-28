@@ -18,7 +18,7 @@ hbs.registerPartials(directioriopartials);
 const port = process.env.PORT || 3000;
 
 
-const sgMail = require('@sendgrid/mail');
+var sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 app.set('view engine', 'hbs');
