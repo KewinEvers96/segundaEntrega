@@ -37,7 +37,7 @@ require('./helpers');
 // }));
 
 
-mongoose.connect('mongodb://localhost:27017/baseDeDatos',{useNewUrlParser:true}, (err,result) =>{
+mongoose.connect(process.env.URLDB,{useNewUrlParser:true}, (err,result) =>{
   if(err){
       return console.log(err);
   }
