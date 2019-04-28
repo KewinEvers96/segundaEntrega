@@ -17,6 +17,10 @@ hbs.registerPartials(directioriopartials);
 
 const port = process.env.PORT || 3000;
 
+
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey('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');
+
 app.set('view engine', 'hbs');
 
 require('./helpers');
@@ -33,14 +37,13 @@ require('./helpers');
 // }));
 
 
-mongoose.connect(process.env.URLDB,{useNewUrlParser:true}, (err,result) =>{
+mongoose.connect('mongodb://localhost:27017/baseDeDatos',{useNewUrlParser:true}, (err,result) =>{
   if(err){
       return console.log(err);
   }
   console.log("conectado");
 });
 
-const sgMail = process.env.SENDGRID_API_KEY;
 
 
 
