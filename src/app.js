@@ -84,7 +84,11 @@ var upload = multer({});
 
 
 app.get('/coordinador/home', function (req, res) {
-  	res.render('usuario/coordinador/home.hbs',{id:idingreso})
+    Usuario.findOne({id:idingreso},(err,resultado) =>{
+      avatar = resultado.avatar.toString('base64');
+      res.render('usuario/coordinador/home.hbs',{id:idingreso, avatar:avatar})
+    });
+  	
 });
 
 // PARA LISTAR CURSOS 
@@ -248,7 +252,8 @@ app.get('/aspirante/home', function (req, res) {
       }
       res.render('usuario/aspirante/home.hbs',{
         id:idingreso,
-        listaCursos:resultado.cursos
+        listaCursos:resultado.cursos,
+        avatar:resultado.avatar.toString('base64')
       });
     });
 });
@@ -301,7 +306,8 @@ app.get('/docente/home', function (req, res) {
       }
       res.render('usuario/docente/home.hbs',{
         id:idingreso,
-        listaCursos:resultado.cursos
+        listaCursos:resultado.cursos,
+        avatar:resultado.avatar
       });
     });
 });
