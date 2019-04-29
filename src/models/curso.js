@@ -36,6 +36,9 @@ const cursoSchema = new Schema({
     },
     aspirantes:{
         type:Array
+    },
+    mensajes:{
+        type:Array
     }
 });
 cursoSchema.plugin(uniqueValidator);

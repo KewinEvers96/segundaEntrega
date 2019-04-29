@@ -11,7 +11,8 @@ const bcrypt = require('bcrypt');
 // var MemoryStore = require('memorystore')(session)
 require('./config/config')
 const server = require('http').createServer(app);
-const io = require('socket.io')(server);  
+const io = require('socket.io')(server);
+const multer = require('multer');  
 
 const { Usuarios } = require('./usuarios');
 const usuarios = new Usuarios();
@@ -72,6 +73,10 @@ mongoose.connect('mongodb://localhost:27017/baseDeDatos',{useNewUrlParser:true},
 
 
 
+
+// Lo de archivos 
+
+var upload = multer({dest:'uploads/'});
 
 
 
@@ -343,7 +348,7 @@ app.get('/docente/mensajes', function (req, res) {
 
 //////////////////////////////////////////////////////////////////////////////////
 
-app.get('/registered', function (req, res) {
+app.post('/registered',upload.single('archivo'), function (req, res) {
 	// nombre = req.query.name;
 	// id = parseInt(req.query.document);
 	// correo = req.query.email;	
@@ -351,22 +356,23 @@ app.get('/registered', function (req, res) {
 
 	// funciones.registrar(nombre, id, correo, telefono);
   let usuario = new Usuario({
-    nombre :req.query.name,
-    id : parseInt(req.query.document),
-    password:bcrypt.hashSync(req.query.password,10),
-    correo : req.query.email,
-    telefono: parseInt(req.query.phoneNumber),
+    nombre :req.body.name,
+    id : parseInt(req.body.document),
+    password:bcrypt.hashSync(req.body.password,10),
+    correo : req.body.email,
+    telefono: parseInt(req.body.phoneNumber),
     tipoUsuario:'aspirante'
   });
+
   const msg ={
-    to: req.query.email, 
+    to: req.body.email, 
     from: 'kewin4@gmail.com',
     subject: 'Bienvenido',
     text:'Has sido registrado satisfactoriamente',
     html: '<p> Tu registro con tus datos:<ul>'+
-          '<li>Documento de identidad: </li>'+ req.query.document+
-          '<li>Nombre</li>'+ req.query.nombre + 
-          '<li>Telefono</li>' + req.query.telefono +
+          '<li>Documento de identidad: </li>'+ req.body.document+
+          '<li>Nombre</li>'+ req.body.nombre + 
+          '<li>Telefono</li>' + req.body.telefono +
           ' </ul></p>'
   }
   
