@@ -481,6 +481,10 @@ app.get('/requestLogin', function (req, res) {
     
 });
 
+app.get('/faqs', function (req, res) {
+  res.render('faqs.hbs')
+});
+
 app.get('/cerrar', function (req, res) {
   req.session.destroy((err) => {
     if (err) return console.log(err) 	
