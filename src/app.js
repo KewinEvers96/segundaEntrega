@@ -13,31 +13,21 @@ require('./config/config')
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);  
 
-// const { Usuarios } = require('./usuarios');
-// const usuarios = new Usuarios();
+const { Usuarios } = require('./usuarios');
+const usuarios = new Usuarios();
 
 
 // PARTE DEL CHAT 
 io.on('connection', client => {
+  console.log('un usuario se ha conectado');
 
-  // // USUARIO NUEVO 
-  // client.on('usuarioNuevo', (usuario) =>{
-	// 	let listado = usuarios.agregarUsuario(client.id, usuario)
-	// 	console.log(listado)
-	// 	let texto = `Se ha conectado ${usuario}`
-	// 	io.emit('nuevoUsuario', texto )
-  // });
-
-
-  
-  client.on("textoPrivado", (text, callback) =>{
-		// let usuario = usuarios.getUsuario(client.id)
-		let texto = `${text.mensajePrivado}`
-		let destinatario = usuarios.getDestinatario(text.destinatario)
-		client.broadcast.to(destinatario.id).emit("textoPrivado", (texto))
-		callback()
-	})
-})
+  client.on('usuarioNuevo',(idIngreso) =>{
+    let listado = usuarios.agregarUsuario(client.id, idIngreso)
+		console.log(listado)
+		let texto = `Se ha conectado ${idIngreso}`
+		io.emit('nuevoUsuario', texto )
+  });
+});
 
 const directioriopublico = path.join(__dirname, '../public');
 const directioriopartials = path.join(__dirname, '../partials');
