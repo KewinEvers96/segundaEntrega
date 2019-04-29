@@ -34,6 +34,9 @@ const usuarioSchema = new Schema({
     },
     cursos:{
         type:Array
+    },
+    avatar:{
+        type:Buffer
     }
 });
 usuarioSchema.plugin(uniqueValidator);

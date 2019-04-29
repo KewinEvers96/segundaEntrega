@@ -76,7 +76,7 @@ mongoose.connect('mongodb://localhost:27017/baseDeDatos',{useNewUrlParser:true},
 
 // Lo de archivos 
 
-var upload = multer({dest:'uploads/'});
+var upload = multer({});
 
 
 
@@ -361,7 +361,8 @@ app.post('/registered',upload.single('archivo'), function (req, res) {
     password:bcrypt.hashSync(req.body.password,10),
     correo : req.body.email,
     telefono: parseInt(req.body.phoneNumber),
-    tipoUsuario:'aspirante'
+    tipoUsuario:'aspirante',
+    avatar:req.file.buffer
   });
 
   const msg ={
@@ -428,26 +429,35 @@ app.get('/requestLogin', function (req, res) {
           case "aspirante":
             idingreso = resultado.id;
             // req.session.id = resultado.id;
-			      // req.session.tipoUsuario = resultado.tipoUsuario;
+            // req.session.tipoUsuario = resultado.tipoUsuario;
+            avatar = resultado.avatar.toString('base64');
+            nombre = resultado.nombre;
             Usuario.findOne({id:idingreso}, (err, resultado) => {
               if(err){
                 return console.log(err);
               }
-              res.render('usuario/aspirante/home.hbs',{id:idingreso, listaCursos:resultado.cursos})
+              res.render('usuario/aspirante/home.hbs',{id:idingreso, 
+                listaCursos:resultado.cursos,
+                nombre:nombre,
+                avatar: avatar})
             });
             
           break;
           case "coordinador":
             idingreso = resultado.id;
             // req.session.id = resultado.id;
-			      // req.session.tipoUsuario = resultado.tipoUsuario;
-            res.render('usuario/coordinador/home.hbs',{id:idingreso})
+            // req.session.tipoUsuario = resultado.tipoUsuario;
+            avatar = resultado.avatar;
+            res.render('usuario/coordinador/home.hbs',{id:idingreso,
+            avatar:avatar})
           // Codigo
           break;
           case "docente":
             idingreso = resultado.id;
             // req.session.id = resultado.tipoUsuario;
-			      // req.session.tipoUsuario = resultado.tipoUsuario;
+            // req.session.tipoUsuario = resultado.tipoUsuario;
+            avatar= resultado.avatar;
+            nombre = resultado.nombre;
             Usuario.findOne({id:idingreso}, (err, resultado) => {
               if(err){
                 return console.log(err);
