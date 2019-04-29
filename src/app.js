@@ -447,7 +447,7 @@ app.get('/requestLogin', function (req, res) {
             idingreso = resultado.id;
             // req.session.id = resultado.id;
             // req.session.tipoUsuario = resultado.tipoUsuario;
-            avatar = resultado.avatar;
+            avatar = resultado.avatar.toString('base64');
             res.render('usuario/coordinador/home.hbs',{id:idingreso,
             avatar:avatar})
           // Codigo
@@ -456,7 +456,7 @@ app.get('/requestLogin', function (req, res) {
             idingreso = resultado.id;
             // req.session.id = resultado.tipoUsuario;
             // req.session.tipoUsuario = resultado.tipoUsuario;
-            avatar= resultado.avatar;
+            avatar= resultado.avatar.toString('base64');
             nombre = resultado.nombre;
             Usuario.findOne({id:idingreso}, (err, resultado) => {
               if(err){
