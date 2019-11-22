@@ -10,7 +10,7 @@
     "express": "^4.16.4",
     "hbs": "^4.0.3",
     "init": "^0.1.2",
-    "mongoose": "^5.5.1",
+    "mongoose": "^5.7.5",
     "mongoose-unique-validator": "^2.0.2",
     "yargs": "^13.2.2",
     "@sendgrid/mail":"6.3.1",
